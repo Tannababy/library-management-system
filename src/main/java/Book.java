@@ -35,9 +35,9 @@ public class Book {
     }
 
 
-    public String borrowBook(){
+    public String borrowBook() {
 
-        if (isBorrowed()){
+        if (isBorrowed()) {
             return "This book has been borrowed already.";
         } else {
             setBorrowed(true);
@@ -45,12 +45,17 @@ public class Book {
         }
     }
 
-    public String returnBook(){
-        if (!isBorrowed()){
+    public String returnBook() {
+        if (!isBorrowed()) {
             return "This book has not been borrowed yet, cannot return!";
         } else {
             setBorrowed(false);
             return "This book has been returned";
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Book: " +  this.title + ", Author: " + this.author;
     }
 }
