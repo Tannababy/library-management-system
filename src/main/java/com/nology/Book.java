@@ -1,3 +1,7 @@
+package com.nology;
+
+import com.nology.user.User;
+
 public class Book {
 
     private String title;
@@ -64,6 +68,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book: " +  this.title + ", Author: " + this.author;
+        return "com.nology.Book: " +  this.title + ", Author: " + this.author;
     }
 }

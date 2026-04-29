@@ -1,4 +1,4 @@
-# Library Management System (Console based)
+# com.nology.Library Management System (Console based)
 
 The objective of this project is to build a console-based system that allows users to:
 - Add books

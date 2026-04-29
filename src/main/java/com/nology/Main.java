@@ -1,4 +1,7 @@
-import java.util.Arrays;
+package com.nology;
+
+import com.nology.user.User;
+
 import java.util.Scanner;
 
 public class Main {
@@ -13,8 +16,10 @@ public class Main {
         Book pet = new Book("Pet", "Lotanna Amobi");
 
 
+        System.out.println("Welcome to Sunshine :D");
+
+
         User newUser = new User(User.returnName(), User.returnEmail(), User.returnPassword());
-        myLibrary.addBook(pet);
 
 
 
@@ -66,7 +71,6 @@ public class Main {
 
         String menu = "MENU:\n1 - Add book to library\n2 - Borrow book\n3 - Return book\n4 - Display all books";
 
-        System.out.println("Welcome to Sunshine Library :D");
         System.out.println("-------------------------------");
         System.out.println(menu);
 
