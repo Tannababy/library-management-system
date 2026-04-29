@@ -2,7 +2,8 @@ public class Book {
 
     private String title;
     private String author;
-    boolean isBorrowed;
+    private boolean isBorrowed;
+    private User borrowedBy;
 
     // constructor - 2 args
     public Book(String title, String author) {
@@ -34,25 +35,32 @@ public class Book {
         isBorrowed = borrowed;
     }
 
-
-    public String borrowBook() {
-
-        if (isBorrowed()) {
-            return "This book has been borrowed already.";
-        } else {
-            setBorrowed(true);
-            return "This book is available, you can borrow this book";
-        }
+    public User getBorrowedBy() {
+        return borrowedBy;
     }
 
-    public String returnBook() {
-        if (!isBorrowed()) {
-            return "This book has not been borrowed yet, cannot return!";
-        } else {
-            setBorrowed(false);
-            return "This book has been returned";
-        }
+    public void setBorrowedBy(User borrowedBy) {
+        this.borrowedBy = borrowedBy;
     }
+
+    //    public String borrowBook() {
+//
+//        if (isBorrowed()) {
+//            return "This book has been borrowed already.";
+//        } else {
+//            setBorrowed(true);
+//            return "This book is available, you can borrow this book";
+//        }
+//    }
+//
+//    public String returnBook() {
+//        if (!isBorrowed()) {
+//            return "This book has not been borrowed yet, cannot return!";
+//        } else {
+//            setBorrowed(false);
+//            return "This book has been returned";
+//        }
+//    }
 
     @Override
     public String toString() {

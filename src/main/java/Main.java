@@ -7,31 +7,54 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
 
+        Library myLibrary = new Library();
 
+        Book hoodFeminism = new Book("Hood Feminism", "Mikki Kendall");
+        Book pet = new Book("Pet", "Lotanna Amobi");
+
+
+        User newUser = new User(User.returnName(), User.returnEmail(), User.returnPassword());
+        myLibrary.addBook(pet);
 
 
 
         displayMenu();
         int userOption = scanner.nextInt();
+        scanner.nextLine(); // to consume extra line
 
         switch (userOption) {
-            case 1 -> System.out.println("Create a book");
-            case 2 -> System.out.println("Add book to library");
-            case 3 -> System.out.println("Borrow book");
-            case 4 -> System.out.println("Return book");
-            case 5 -> System.out.println("Display all books");
+            case 1 -> {
+                System.out.println("Add book to library");
+
+                System.out.println("Enter book name");
+                String bookTitle = scanner.nextLine();
+//                myLibrary.addBook(newUser, bookTitle);
+            }
+            case 2 -> {
+
+                System.out.println("Enter book name");
+                String bookTitle = scanner.nextLine();
+                myLibrary.borrowBook(newUser, bookTitle);
+            }
+            case 3 -> {
+                System.out.println("Return book");
+
+                System.out.println("Enter book name");
+                String bookTitle = scanner.nextLine();
+//                myLibrary.returnBook(newUser, bookTitle);
+            }
+
+
+            case 4 -> System.out.println("Display all books");
         }
 
-        Book hoodFeminism = new Book("Hood Feminism", "Mikki Kendall");
-        Book pet = new Book("Pet", "Lotanna Amobi");
+//        System.out.println(hoodFeminism);
 
-        System.out.println(hoodFeminism);
+//        myLibrary.addBook(hoodFeminism);
+//        myLibrary.addBook(pet);
 
-        Library myLibrary = new Library();
-        myLibrary.addBook(hoodFeminism);
-        myLibrary.addBook(pet);
 
-        myLibrary.displayBooks();
+//        myLibrary.displayBooks();
 
 
 
@@ -42,7 +65,7 @@ public class Main {
 
     public static void displayMenu() {
 
-        String menu = "MENU:\n1 - Create a book\n2 - Add book to library\n3 - Borrow book\n4 - Return book\n5 - Display all books";
+        String menu = "MENU:\n1 - Add book to library\n2 - Borrow book\n3 - Return book\n4 - Display all books";
 
         System.out.println("Welcome to Sunshine Library :D");
         System.out.println("-------------------------------");

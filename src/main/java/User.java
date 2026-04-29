@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class User {
@@ -6,6 +7,7 @@ public class User {
     private String email;
     private String password;
     private int id;
+    public ArrayList<Book> borrowedBooks = new ArrayList<>();
 
     static Scanner userScanner = new Scanner(System.in);
 

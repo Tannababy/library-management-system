@@ -2,34 +2,50 @@ import java.util.ArrayList;
 
 public class Library {
 
-    private ArrayList<Book> bookList = new ArrayList<>();
+    private ArrayList<Book> books = new ArrayList<>();
+    private User user;
 
 
-    public boolean checkForBook(ArrayList<Book> bookList, Book book){
+    public void addBook(Book book) {
+        books.add(book);
+    }
 
-        for (int i = 0; i < bookList.size(); i++) {
+    public void borrowBook(User user, String bookTitle) {
 
-            if (bookList.contains(book)) {
-                return true;
+        boolean isFound = false;
+        //
+        for (int i = 0; i < books.size(); i++) {
+
+            Book libraryBook = books.get(i);
+
+            // checks if given bookTitle matches a book in the list of books
+            if (bookTitle.trim().equalsIgnoreCase(libraryBook.getTitle())) {
+
+                isFound = true;
+
+                //checks if library book has already been borrowed
+                if (libraryBook.isBorrowed()) {
+                    System.out.println("Book already borrowed");
+                    return;
+                }
+
+                libraryBook.setBorrowed(true);
+                libraryBook.setBorrowedBy(user);
+                user.borrowedBooks.add(libraryBook);
+
+                System.out.println("Book: " + libraryBook.getTitle() + ", borrowed by user: " + user.getName());
+                return;
+
             }
+
         }
-            return false;
+        System.out.println("Book: " + bookTitle + ", was not found in library");
     }
 
-    public void addBook(Book newBook){
-
-       if (checkForBook(bookList, newBook)){
-           System.out.println("This book already exists in the library. It cannot be added again");
-       }
-        else {
-            bookList.add(newBook);
-           System.out.println("This book has been added to library");
-        }
-    }
 
     public void displayBooks(){
-        for (int i = 0; i < bookList.size(); i++) {
-            System.out.println(bookList.get(i));
+        for (int i = 0; i < books.size(); i++) {
+            System.out.println(books.get(i));
         }
     }
 
