@@ -37,11 +37,10 @@ public class Main {
                 myLibrary.borrowBook(newUser, bookTitle);
             }
             case 3 -> {
-                System.out.println("Return book");
 
                 System.out.println("Enter book name");
                 String bookTitle = scanner.nextLine();
-//                myLibrary.returnBook(newUser, bookTitle);
+                myLibrary.returnBook(newUser, bookTitle);
             }
 
 
