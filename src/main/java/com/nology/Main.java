@@ -12,45 +12,63 @@ public class Main {
 
         Library myLibrary = new Library();
 
-        Book hoodFeminism = new Book("Hood Feminism", "Mikki Kendall");
-        Book pet = new Book("Pet", "Lotanna Amobi");
-
-
         System.out.println("Welcome to Sunshine Library :D");
+        System.out.println("Choose between:\n1: Create Account\n2: Login");
+        int startOption = scanner.nextInt();
+        scanner.nextLine();
+
+        User newUser;
+        User currentUser;
+
+        if (startOption == 1) {
+
+         String newUserName = User.returnName();
+         String newUserEmail = User.returnEmail();
+         String newUserPassword = User.returnPassword();
+
+         newUser = new User(newUserName, newUserEmail, newUserPassword);
+
+         if (!(myLibrary.isUser(newUser))) {
+
+             myLibrary.addUserToUsersList(newUser);
+             currentUser = newUser;
+
+             displayUserMenu();
+             int userMenuOption = scanner.nextInt();
+             scanner.nextLine();
+
+             switch (userMenuOption) {
+
+                 case 1 -> myLibrary.displayBooks();
+                 case 2 -> {
+                     System.out.println("Enter book name");
+                     String title = scanner.nextLine();
+                     myLibrary.borrowBook(currentUser, title);
+                 }
+                 case 3 -> {
+                     System.out.println("Enter book name");
+                     String title = scanner.nextLine();
+                     myLibrary.returnBook(currentUser, title);
+                 }
+             }
+
+         }
+
+        } else if (startOption == 2) {
 
 
-        User newUser = new User(User.returnName(), User.returnEmail(), User.returnPassword());
+            System.out.println("Coming soon");
 
-
-
-        displayMenu();
-        int userOption = scanner.nextInt();
-        scanner.nextLine(); // to consume extra line
-
-        switch (userOption) {
-            case 1 -> {
-                System.out.println("Add book to library");
-
-                System.out.println("Enter book name");
-                String bookTitle = scanner.nextLine();
-//                myLibrary.addBook(newUser, bookTitle);
-            }
-            case 2 -> {
-
-                System.out.println("Enter book name");
-                String bookTitle = scanner.nextLine();
-                myLibrary.borrowBook(newUser, bookTitle);
-            }
-            case 3 -> {
-
-                System.out.println("Enter book name");
-                String bookTitle = scanner.nextLine();
-                myLibrary.returnBook(newUser, bookTitle);
-            }
-
-
-            case 4 -> System.out.println("Display all books");
+        } else {
+            System.out.println("Incorrect selection, please choose 1 for login or 2 to create an account!");
         }
+
+
+
+//        Book hoodFeminism = new Book("Hood Feminism", "Mikki Kendall");
+//        Book pet = new Book("Pet", "Lotanna Amobi");
+
+
 
 //        System.out.println(hoodFeminism);
 
@@ -76,6 +94,13 @@ public class Main {
 
     }
 
+    public static void displayUserMenu() {
 
+        String menu = "MENU:\n1 - Display all books\n2 - Borrow book\n3 - Return book";
+
+        System.out.println("-------------------------------");
+        System.out.println(menu);
+
+    }
 
 }

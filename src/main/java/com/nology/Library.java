@@ -8,6 +8,35 @@ import java.util.ArrayList;
 public class Library {
 
     private ArrayList<Book> books = new ArrayList<>();
+    private ArrayList<User> users = new ArrayList<>();
+
+
+    public boolean isUser(User user) {
+
+        for (int i = 0; i < users.size(); i++) {
+
+            User foundUser = users.get(i);
+
+            if (user.getName().equalsIgnoreCase(foundUser.getName()) && user.getEmail().equalsIgnoreCase(foundUser.getEmail())) {
+
+                System.out.println("Welcome back " + foundUser.getName());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addUserToUsersList(User user) {
+
+        if (!(isUser(user))) {
+
+            users.add(user);
+            System.out.println("User account for " + user.getName() + " has been created successfully");
+        } else {
+            System.out.println("User account already exists!");
+        }
+    }
+
 
 
     public void addBook(User user, Book book) {
@@ -92,6 +121,7 @@ public class Library {
             System.out.println(books.get(i));
         }
     }
+
 
 
 }

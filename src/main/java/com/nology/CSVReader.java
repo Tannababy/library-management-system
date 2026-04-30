@@ -1,7 +1,6 @@
 package com.nology;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,18 +9,19 @@ import java.util.List;
 
 public class CSVReader {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
 
         // csv file path
-        String csvPath = "com/nology/books_data.csv";
+        String csvPath = "books_data.csv";
 
         List<List<String>> data = new ArrayList<>();
 
 
+        BufferedReader reader = null;
+        try {
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(csvPath))) {
-
+            reader = new BufferedReader(new FileReader(csvPath));
             String line;
 
             while ((line = reader.readLine()) != null) {
@@ -38,7 +38,13 @@ public class CSVReader {
             for (int i = 0; i < data.size(); i++) {
 
                 List<String> row = data.get(i);
-                System.out.println("Row " + i + ": " + String.join(",", row));
+
+
+                String bookTitle = row.get(1);
+                String bookAuthor = row.get(2);
+                System.out.println("Row " + i + ": Book: " + bookTitle + ", By: " + bookAuthor);
+
+
             }
 
 
@@ -46,7 +52,14 @@ public class CSVReader {
 
             System.err.println("CSV file not found: " + e.getMessage());
             e.printStackTrace();
+        } finally {
+        reader.close();
         }
-
     }
+
+    // [
+    // [ 0, 1, 3, 4  ]
+    // [ 0, 1, 3, 4  ]
+    // [ 0, 1, 3, 4  ]
+    // ]
 }
