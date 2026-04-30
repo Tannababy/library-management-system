@@ -44,21 +44,22 @@ public class Library {
 
                 //checks if library book has already been borrowed
                 if (libraryBook.isBorrowed()) {
-                    System.out.println("com.nology.Book already borrowed");
+                    System.out.println("Book already borrowed");
                     return;
                 }
+
 
                 libraryBook.setBorrowed(true);
                 libraryBook.setBorrowedBy(user);
                 user.borrowedBooks.add(libraryBook);
 
-                System.out.println("com.nology.Book: " + libraryBook.getTitle() + ", borrowed by user: " + user.getName());
+                System.out.println("Book: " + libraryBook.getTitle() + ", borrowed by user: " + user.getName());
                 return;
 
             }
 
         }
-        System.out.println("com.nology.Book: " + bookTitle + ", was not found in library");
+        System.out.println("Book: " + bookTitle + ", was not found in library");
     }
 
     public void returnBook(User user, String bookTitle) {
@@ -75,13 +76,13 @@ public class Library {
                 returnedBook.setBorrowedBy(null);
                 user.borrowedBooks.remove(returnedBook);
 
-                System.out.println("com.nology.Book: " + bookTitle + ", has been returned by user: " + user.getName());
+                System.out.println("Book: " + bookTitle + ", has been returned by user: " + user.getName());
                 return;
             }
 
         }
 
-        System.out.println("com.nology.Book: " + bookTitle + ", was not borrowed by user: " + user.getName() + ". It can't be returned.");
+        System.out.println("Book: " + bookTitle + ", was not borrowed by user: " + user.getName() + ". It can't be returned.");
 
     }
 

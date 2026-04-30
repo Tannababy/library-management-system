@@ -16,7 +16,7 @@ public class Main {
         Book pet = new Book("Pet", "Lotanna Amobi");
 
 
-        System.out.println("Welcome to Sunshine :D");
+        System.out.println("Welcome to Sunshine Library :D");
 
 
         User newUser = new User(User.returnName(), User.returnEmail(), User.returnPassword());
