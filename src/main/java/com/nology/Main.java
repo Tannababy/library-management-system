@@ -18,18 +18,19 @@ public class Main {
         int startOption = scanner.nextInt();
         scanner.nextLine();
 
-        User newUser;
+
         User currentUser;
 
         if (startOption == 1) {
-            String userName = User.returnName();
-            String userEmail = User.returnEmail();
-            String userPass = User.returnPassword();
+
+            User newUser = new User(User.returnName(), User.returnEmail(), User.returnPassword());
+
+            if (myLibrary.emailExists(newUser.getEmail())) {
+
+                System.out.println("This email has already been used, please use another one to create account");
 
 
-            newUser = new User(userName, userEmail, userPass);
-
-            if (myLibrary.findUser(newUser.getEmail(), newUser.getEmail()) == null) {
+            } else {
 
                 myLibrary.addUserToUsersList(newUser);
                 currentUser = newUser;
@@ -52,9 +53,6 @@ public class Main {
                         myLibrary.returnBook(currentUser, title);
                     }
                 }
-
-            } else {
-                System.out.println("User account already exists, cannot create new account");
             }
 
         } else if (startOption == 2) {
@@ -67,6 +65,8 @@ public class Main {
             } else {
 
                 System.out.println("Welcome back " + currentUser.getName());
+
+                displayUserMenu();
                 int userMenuOption = scanner.nextInt();
                 scanner.nextLine();
 
@@ -100,14 +100,6 @@ public class Main {
 
     }
 
-    public static void displayMenu() {
-
-        String menu = "MENU:\n1 - Add book to library\n2 - Borrow book\n3 - Return book\n4 - Display all books";
-
-        System.out.println("-------------------------------");
-        System.out.println(menu);
-
-    }
 
     public static void displayUserMenu() {
 
@@ -117,5 +109,28 @@ public class Main {
         System.out.println(menu);
 
     }
+
+//    public static void handleUserOptions(User currentUser) {
+//
+//        Scanner myScanner = new Scanner(System.in);
+//
+//        int userMenuOption = myScanner.nextInt();
+//        myScanner.nextLine();
+//
+//        switch (userMenuOption) {
+//
+//            case 1 -> myLibrary.displayBooks();
+//            case 2 -> {
+//                System.out.println("Enter book name");
+//                String title = myScanner.nextLine();
+//                myLibrary.borrowBook(currentUser, title);
+//            }
+//            case 3 -> {
+//                System.out.println("Enter book name");
+//                String title = myScanner.nextLine();
+//                myLibrary.returnBook(currentUser, title);
+//            }
+//        }
+//    }
 
 }

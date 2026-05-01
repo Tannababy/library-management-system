@@ -11,6 +11,20 @@ public class Library {
     private ArrayList<User> users = new ArrayList<>();
 
 
+    public boolean emailExists(String email) {
+
+        for (int i = 0; i < users.size(); i++) {
+
+            if (email.trim().equalsIgnoreCase(users.get(i).getEmail())){
+
+                return true;
+            }
+
+        }
+        return false;
+
+    }
+
     public User findUser(String email, String password) {
 
         for (int i = 0; i < users.size(); i++) {
