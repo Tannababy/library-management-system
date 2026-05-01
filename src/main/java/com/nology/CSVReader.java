@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CSVReader {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
 
         // csv file path
@@ -18,10 +18,8 @@ public class CSVReader {
         List<List<String>> data = new ArrayList<>();
 
 
-        BufferedReader reader = null;
-        try {
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvPath))) {
 
-            reader = new BufferedReader(new FileReader(csvPath));
             String line;
 
             while ((line = reader.readLine()) != null) {
@@ -52,8 +50,6 @@ public class CSVReader {
 
             System.err.println("CSV file not found: " + e.getMessage());
             e.printStackTrace();
-        } finally {
-        reader.close();
         }
     }
 

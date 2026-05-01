@@ -11,24 +11,27 @@ public class Library {
     private ArrayList<User> users = new ArrayList<>();
 
 
-    public boolean isUser(User user) {
+    public User findUser(String email, String password) {
 
         for (int i = 0; i < users.size(); i++) {
 
             User foundUser = users.get(i);
 
-            if (user.getName().equalsIgnoreCase(foundUser.getName()) && user.getEmail().equalsIgnoreCase(foundUser.getEmail())) {
+            if (email.trim().equalsIgnoreCase(foundUser.getEmail())) {
 
-                System.out.println("Welcome back " + foundUser.getName());
-                return true;
+                if (password.trim().equalsIgnoreCase(foundUser.getPassword())) {
+
+                    System.out.println("Welcome back " + foundUser.getName());
+                    return foundUser;
+                }
             }
         }
-        return false;
+        return null;
     }
 
     public void addUserToUsersList(User user) {
 
-        if (!(isUser(user))) {
+        if (findUser(user.getEmail(), user.getPassword()) == null) {
 
             users.add(user);
             System.out.println("User account for " + user.getName() + " has been created successfully");
