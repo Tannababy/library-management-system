@@ -19,7 +19,7 @@ public class Main {
         scanner.nextLine();
 
         User newUser;
-
+        User currentUser;
 
         if (startOption == 1) {
             String userName = User.returnName();
@@ -32,7 +32,7 @@ public class Main {
             if (myLibrary.findUser(newUser.getEmail(), newUser.getEmail()) == null) {
 
                 myLibrary.addUserToUsersList(newUser);
-                User currentUser = newUser;
+                currentUser = newUser;
 
                 displayUserMenu();
                 int userMenuOption = scanner.nextInt();
@@ -59,8 +59,32 @@ public class Main {
 
         } else if (startOption == 2) {
 
+            currentUser = myLibrary.findUser(User.returnEmail(), User.returnPassword());
 
-            System.out.println("Coming soon");
+            if (currentUser == null) {
+
+                System.out.println("Account not found, please check login details and re-attempt login or create an account.");
+            } else {
+
+                System.out.println("Welcome back " + currentUser.getName());
+                int userMenuOption = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (userMenuOption) {
+
+                    case 1 -> myLibrary.displayBooks();
+                    case 2 -> {
+                        System.out.println("Enter book name");
+                        String title = scanner.nextLine();
+                        myLibrary.borrowBook(currentUser, title);
+                    }
+                    case 3 -> {
+                        System.out.println("Enter book name");
+                        String title = scanner.nextLine();
+                        myLibrary.returnBook(currentUser, title);
+                    }
+                }
+            }
 
         } else {
             System.out.println("Incorrect selection, please choose 1 for login or 2 to create an account!");

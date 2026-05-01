@@ -21,7 +21,6 @@ public class Library {
 
                 if (password.trim().equalsIgnoreCase(foundUser.getPassword())) {
 
-                    System.out.println("Welcome back " + foundUser.getName());
                     return foundUser;
                 }
             }
@@ -120,11 +119,26 @@ public class Library {
 
 
     public void displayBooks(){
-        for (int i = 0; i < books.size(); i++) {
-            System.out.println(books.get(i));
+        if (books.isEmpty()){
+            System.out.println("There are no books currently available in the library");
+        } else {
+            for (int i = 0; i < books.size(); i++) {
+                System.out.println(books.get(i));
+            }
         }
     }
 
 
+    public void displayUsers(){
+
+        if (users.isEmpty()){
+            System.out.println("There are no books currently available in the library");
+        } else {
+            for (int i = 0; i < users.size(); i++) {
+                System.out.println(users.get(i));
+            }
+        }
+
+    }
 
 }

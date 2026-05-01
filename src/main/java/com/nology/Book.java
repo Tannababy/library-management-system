@@ -47,24 +47,6 @@ public class Book {
         this.borrowedBy = borrowedBy;
     }
 
-    //    public String borrowBook() {
-//
-//        if (isBorrowed()) {
-//            return "This book has been borrowed already.";
-//        } else {
-//            setBorrowed(true);
-//            return "This book is available, you can borrow this book";
-//        }
-//    }
-//
-//    public String returnBook() {
-//        if (!isBorrowed()) {
-//            return "This book has not been borrowed yet, cannot return!";
-//        } else {
-//            setBorrowed(false);
-//            return "This book has been returned";
-//        }
-//    }
 
     @Override
     public String toString() {
