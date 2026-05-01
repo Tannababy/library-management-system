@@ -14,8 +14,12 @@ public class Main {
         Library myLibrary = new Library();
 
         User currentUser;
+        boolean isRunning = true;
 
-        int startOption = startMenu(myScanner);
+        // displays start menu and stores input
+        startMenu();
+        int startOption = myScanner.nextInt();
+        myScanner.nextLine();
 
         // Create account
         if (startOption == 1) {
@@ -24,6 +28,7 @@ public class Main {
             String inputEmail = User.returnEmail();
             String inputPassword = User.returnPassword();
 
+            // check for unique email
             if (myLibrary.emailExists(inputEmail)) {
 
                 System.out.println("This email has already been used, please use another one to create account");
@@ -31,18 +36,37 @@ public class Main {
 
             } else {
 
+                // account creation
                 User newUser = new User(inputName, inputEmail, inputPassword);
                 myLibrary.addUserToUsersList(newUser);
                 currentUser = newUser;
 
 
-                handleUserOptions(currentUser, displayUserMenu(myScanner), myLibrary, myScanner);
+
+                while (isRunning) {
+
+                    displayUserMenu();
+                    int userOption = myScanner.nextInt();
+                    myScanner.nextLine();
+
+
+                    if (userOption == 0){
+
+                        isRunning = false;
+                    }
+                    else {
+                        handleUserOptions(currentUser, userOption, myLibrary, myScanner);
+                    }
+
+
+                }
+
             }
 
             // Login
         } else if (startOption == 2) {
 
-            myScanner.nextLine();
+            // update currentUser state with saved user
             currentUser = myLibrary.findUser(User.returnEmail(), User.returnPassword());
 
             if (currentUser == null) {
@@ -53,7 +77,25 @@ public class Main {
                 System.out.println("Welcome back " + currentUser.getName());
 
 
-                handleUserOptions(currentUser, displayUserMenu(myScanner), myLibrary, myScanner);
+
+
+                while (isRunning) {
+
+
+                    displayUserMenu();
+                    int userOption = myScanner.nextInt();
+                    myScanner.nextLine();
+
+                    if (userOption == 0){
+
+                        isRunning = false;
+                    }
+                    else {
+                        handleUserOptions(currentUser, userOption, myLibrary, myScanner);
+                    }
+
+
+                }
 
             }
 
@@ -71,26 +113,24 @@ public class Main {
 
     }
 
-    public static int startMenu(Scanner scanner) {
+    public static void startMenu() {
 
 
         System.out.println("Welcome to Sunshine Library :D");
         System.out.println("Choose between:\n1: Create Account\n2: Login");
 
-        return scanner.nextInt();
 
     }
 
 
-    public static int displayUserMenu(Scanner scanner) {
+    public static void displayUserMenu() {
 
 
-        String menu = "MENU:\n1 - Display all books\n2 - Borrow book\n3 - Return book";
+        String menu = "MENU:\n1 - Display all books\n2 - Borrow book\n3 - Return book\n0 - Exit";
 
         System.out.println("-------------------------------");
         System.out.println(menu);
 
-        return scanner.nextInt();
     }
 
     public static void handleUserOptions(User currentUser, int userMenuOption, Library library, Scanner scanner) {
@@ -98,17 +138,22 @@ public class Main {
 
         switch (userMenuOption) {
 
-            case 1 -> library.displayBooks();
+            case 1 -> {
+                library.displayBooks();
+            }
             case 2 -> {
                 System.out.println("Enter book name");
                 String title = scanner.nextLine();
                 library.borrowBook(currentUser, title);
+
             }
             case 3 -> {
                 System.out.println("Enter book name");
                 String title = scanner.nextLine();
                 library.returnBook(currentUser, title);
+
             }
+
         }
 
 
