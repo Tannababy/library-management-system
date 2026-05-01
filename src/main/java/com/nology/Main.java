@@ -7,56 +7,42 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+
+        Scanner myScanner = new Scanner(System.in);
 
 
         Library myLibrary = new Library();
 
-
-        System.out.println("Welcome to Sunshine Library :D");
-        System.out.println("Choose between:\n1: Create Account\n2: Login");
-        int startOption = scanner.nextInt();
-        scanner.nextLine();
-
-
         User currentUser;
 
+        int startOption = startMenu(myScanner);
+
+        // Create account
         if (startOption == 1) {
 
-            User newUser = new User(User.returnName(), User.returnEmail(), User.returnPassword());
+            String inputName = User.returnName();
+            String inputEmail = User.returnEmail();
+            String inputPassword = User.returnPassword();
 
-            if (myLibrary.emailExists(newUser.getEmail())) {
+            if (myLibrary.emailExists(inputEmail)) {
 
                 System.out.println("This email has already been used, please use another one to create account");
 
 
             } else {
 
+                User newUser = new User(inputName, inputEmail, inputPassword);
                 myLibrary.addUserToUsersList(newUser);
                 currentUser = newUser;
 
-                displayUserMenu();
-                int userMenuOption = scanner.nextInt();
-                scanner.nextLine();
 
-                switch (userMenuOption) {
-
-                    case 1 -> myLibrary.displayBooks();
-                    case 2 -> {
-                        System.out.println("Enter book name");
-                        String title = scanner.nextLine();
-                        myLibrary.borrowBook(currentUser, title);
-                    }
-                    case 3 -> {
-                        System.out.println("Enter book name");
-                        String title = scanner.nextLine();
-                        myLibrary.returnBook(currentUser, title);
-                    }
-                }
+                handleUserOptions(currentUser, displayUserMenu(myScanner), myLibrary, myScanner);
             }
 
+            // Login
         } else if (startOption == 2) {
 
+            myScanner.nextLine();
             currentUser = myLibrary.findUser(User.returnEmail(), User.returnPassword());
 
             if (currentUser == null) {
@@ -66,24 +52,9 @@ public class Main {
 
                 System.out.println("Welcome back " + currentUser.getName());
 
-                displayUserMenu();
-                int userMenuOption = scanner.nextInt();
-                scanner.nextLine();
 
-                switch (userMenuOption) {
+                handleUserOptions(currentUser, displayUserMenu(myScanner), myLibrary, myScanner);
 
-                    case 1 -> myLibrary.displayBooks();
-                    case 2 -> {
-                        System.out.println("Enter book name");
-                        String title = scanner.nextLine();
-                        myLibrary.borrowBook(currentUser, title);
-                    }
-                    case 3 -> {
-                        System.out.println("Enter book name");
-                        String title = scanner.nextLine();
-                        myLibrary.returnBook(currentUser, title);
-                    }
-                }
             }
 
         } else {
@@ -96,41 +67,51 @@ public class Main {
 
 
 
-        scanner.close();
+
+
+    }
+
+    public static int startMenu(Scanner scanner) {
+
+
+        System.out.println("Welcome to Sunshine Library :D");
+        System.out.println("Choose between:\n1: Create Account\n2: Login");
+
+        return scanner.nextInt();
 
     }
 
 
-    public static void displayUserMenu() {
+    public static int displayUserMenu(Scanner scanner) {
+
 
         String menu = "MENU:\n1 - Display all books\n2 - Borrow book\n3 - Return book";
 
         System.out.println("-------------------------------");
         System.out.println(menu);
 
+        return scanner.nextInt();
     }
 
-//    public static void handleUserOptions(User currentUser) {
-//
-//        Scanner myScanner = new Scanner(System.in);
-//
-//        int userMenuOption = myScanner.nextInt();
-//        myScanner.nextLine();
-//
-//        switch (userMenuOption) {
-//
-//            case 1 -> myLibrary.displayBooks();
-//            case 2 -> {
-//                System.out.println("Enter book name");
-//                String title = myScanner.nextLine();
-//                myLibrary.borrowBook(currentUser, title);
-//            }
-//            case 3 -> {
-//                System.out.println("Enter book name");
-//                String title = myScanner.nextLine();
-//                myLibrary.returnBook(currentUser, title);
-//            }
-//        }
-//    }
+    public static void handleUserOptions(User currentUser, int userMenuOption, Library library, Scanner scanner) {
+
+
+        switch (userMenuOption) {
+
+            case 1 -> library.displayBooks();
+            case 2 -> {
+                System.out.println("Enter book name");
+                String title = scanner.nextLine();
+                library.borrowBook(currentUser, title);
+            }
+            case 3 -> {
+                System.out.println("Enter book name");
+                String title = scanner.nextLine();
+                library.returnBook(currentUser, title);
+            }
+        }
+
+
+    }
 
 }

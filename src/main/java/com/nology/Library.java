@@ -132,7 +132,7 @@ public class Library {
     }
 
 
-    public void displayBooks(){
+    public  void displayBooks(){
         if (books.isEmpty()){
             System.out.println("There are no books currently available in the library");
         } else {
