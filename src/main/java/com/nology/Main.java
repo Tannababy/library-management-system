@@ -13,96 +13,76 @@ public class Main {
 
         Library myLibrary = new Library();
 
-        User currentUser;
-        boolean isRunning = true;
+        User currentUser = null;
 
-        // displays start menu and stores input
-        startMenu();
-        int startOption = myScanner.nextInt();
-        myScanner.nextLine();
+        while (currentUser == null) {
 
-        // Create account
-        if (startOption == 1) {
+            startMenu();
+            int startOption = myScanner.nextInt();
+            myScanner.nextLine();
 
-            String inputName = User.returnName();
-            String inputEmail = User.returnEmail();
-            String inputPassword = User.returnPassword();
+            // Create account
+            if (startOption == 1) {
 
-            // check for unique email
-            if (myLibrary.emailExists(inputEmail)) {
+                String inputName = User.returnName();
+                String inputEmail = User.returnEmail();
+                String inputPassword = User.returnPassword();
 
-                System.out.println("This email has already been used, please use another one to create account");
+                // check for unique email
+                if (myLibrary.emailExists(inputEmail)) {
 
-
-            } else {
-
-                // account creation
-                User newUser = new User(inputName, inputEmail, inputPassword);
-                myLibrary.addUserToUsersList(newUser);
-                currentUser = newUser;
+                    System.out.println("This email has already been used, please use another one to create account");
 
 
+                } else {
 
-                while (isRunning) {
-
-                    displayUserMenu();
-                    int userOption = myScanner.nextInt();
-                    myScanner.nextLine();
-
-
-                    if (userOption == 0){
-
-                        isRunning = false;
-                    }
-                    else {
-                        handleUserOptions(currentUser, userOption, myLibrary, myScanner);
-                    }
-
+                    // account creation
+                    User newUser = new User(inputName, inputEmail, inputPassword);
+                    myLibrary.addUserToUsersList(newUser);
+                    currentUser = newUser;
 
                 }
 
-            }
+                // Login
+            } else if (startOption == 2) {
 
-            // Login
-        } else if (startOption == 2) {
+                // update currentUser state with saved user
+                currentUser = myLibrary.findUser(User.returnEmail(), User.returnPassword());
 
-            // update currentUser state with saved user
-            currentUser = myLibrary.findUser(User.returnEmail(), User.returnPassword());
+                if (currentUser == null) {
 
-            if (currentUser == null) {
+                    System.out.println("Account not found, please check login details and re-attempt login or create an account.");
+                } else {
 
-                System.out.println("Account not found, please check login details and re-attempt login or create an account.");
-            } else {
-
-                System.out.println("Welcome back " + currentUser.getName());
-
-
-
-
-                while (isRunning) {
-
-
-                    displayUserMenu();
-                    int userOption = myScanner.nextInt();
-                    myScanner.nextLine();
-
-                    if (userOption == 0){
-
-                        isRunning = false;
-                    }
-                    else {
-                        handleUserOptions(currentUser, userOption, myLibrary, myScanner);
-                    }
-
+                    System.out.println("Welcome back " + currentUser.getName());
 
                 }
 
+            } else {
+                System.out.println("Incorrect selection, please choose 1 for login or 2 to create an account!");
             }
-
-        } else {
-            System.out.println("Incorrect selection, please choose 1 for login or 2 to create an account!");
         }
 
+        boolean isRunning = true;
+
+        while (isRunning) {
+
+
+            displayUserMenu();
+            int userOption = myScanner.nextInt();
+            myScanner.nextLine();
+
+            if (userOption == 0){
+
+                isRunning = false;
+                System.out.println("Existing the application, bye!");
+            }
+            else {
+                handleUserOptions(currentUser, userOption, myLibrary, myScanner);
+            }
+
+
+        }
 
 
 
