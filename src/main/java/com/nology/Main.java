@@ -11,7 +11,11 @@ public class Main {
         Scanner myScanner = new Scanner(System.in);
 
 
+        String usersFilePath = "src/main/java/com/nology/user/users.csv";
+
         Library myLibrary = new Library();
+
+        myLibrary.loadUsers(usersFilePath);
 
         User currentUser = null;
 
@@ -89,6 +93,7 @@ public class Main {
 
 
 
+        myScanner.close();
 
 
     }

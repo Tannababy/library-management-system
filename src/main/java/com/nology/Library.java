@@ -3,12 +3,58 @@ package com.nology;
 import com.nology.user.Admin;
 import com.nology.user.User;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Library {
 
     private ArrayList<Book> books = new ArrayList<>();
     private ArrayList<User> users = new ArrayList<>();
+
+
+    public void loadUsers(String filepath) {
+
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+
+                if (line.contains("Username")){
+                    continue;
+                }
+
+                String[] values = line.split(",");
+                List<String> row = Arrays.asList(values);
+
+                String userName, userEmail, userPassword;
+                for (int i = 0; i < row.size(); i++) {
+
+                    userName = row.get(0);
+                    userEmail = row.get(1);
+                    userPassword = row.get(2);
+
+                    User newUser = new User(userName, userEmail, userPassword);
+                    users.add(newUser);
+
+                }
+
+            }
+
+        } catch (IOException e) {
+
+            System.err.println("CSV file not found: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 
     public boolean emailExists(String email) {
