@@ -3,9 +3,7 @@ package com.nology;
 import com.nology.user.Admin;
 import com.nology.user.User;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,10 +14,40 @@ public class Library {
     private ArrayList<User> users = new ArrayList<>();
 
 
-    public void loadUsers(String filepath) {
+    public void saveUsers(String filePath) {
 
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+
+            String name, email, password;
+            for (int i = 0; i < users.size(); i++) {
+
+                User user = users.get(i);
+
+                name = user.getName();
+                email = user.getEmail();
+                password = user.getPassword();
+
+                String row = name + "," + email + "," + password;
+                writer.write(row);
+                writer.newLine();
+
+
+            }
+
+            System.out.println("Successfully saved users.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void loadUsers(String filePath) {
+
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 
             String line;
 

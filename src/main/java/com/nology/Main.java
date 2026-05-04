@@ -43,6 +43,7 @@ public class Main {
                     // account creation
                     User newUser = new User(inputName, inputEmail, inputPassword);
                     myLibrary.addUserToUsersList(newUser);
+                    myLibrary.saveUsers(usersFilePath);
                     currentUser = newUser;
 
                 }
