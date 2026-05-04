@@ -165,7 +165,7 @@ public class Library {
 
                 rowOfFields.add(currentField.toString());
 
-                Book storedBook = new Book(rowOfFields.get(1), rowOfFields.get(2));
+                Book storedBook = new Book(rowOfFields.get(1), rowOfFields.get(2), false, null);
                 books.add(storedBook);
 
             }
@@ -220,10 +220,11 @@ public class Library {
 
 
                 libraryBook.setBorrowed(true);
-                libraryBook.setBorrowedBy(user);
+                libraryBook.setBorrowedByEmail(user.getEmail());
                 user.borrowedBooks.add(libraryBook);
+                libraryBook.increaseBorrowCount();
 
-                System.out.println("Book: " + libraryBook.getTitle() + ", borrowed by user: " + user.getName());
+                System.out.println("Book: " + libraryBook.getTitle() + ", borrowed by user: " + libraryBook.getBorrowedByEmail());
                 return;
 
             }
@@ -243,7 +244,7 @@ public class Library {
             if (bookTitle.trim().equalsIgnoreCase(returnedBook.getTitle())) {
 
                 returnedBook.setBorrowed(false);
-                returnedBook.setBorrowedBy(null);
+                returnedBook.setBorrowedByEmail(null);
                 user.borrowedBooks.remove(returnedBook);
 
                 System.out.println("Book: " + bookTitle + ", has been returned by user: " + user.getName());

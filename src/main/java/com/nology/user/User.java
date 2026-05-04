@@ -10,7 +10,6 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private int id;
     public ArrayList<Book> borrowedBooks = new ArrayList<>();
 
     static Scanner userScanner = new Scanner(System.in);
@@ -44,28 +43,30 @@ public class User {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Override
     public String toString() {
         return "User: " +  this.getName() + ", Email: " + this.getEmail();
+    }
+
+    public void listOfBorrowedBooks() {
+
+        if (borrowedBooks.isEmpty()) {
+            System.out.println("There are no books currently borrowed by this user");
+        } else {
+            for (Book book : borrowedBooks) {
+
+                System.out.println(book.toString());
+            }
+        }
     }
 }

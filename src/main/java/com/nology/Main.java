@@ -130,12 +130,16 @@ public class Main {
                 library.displayBooks();
             }
             case 2 -> {
+                currentUser.listOfBorrowedBooks();
+
+            }
+            case 3 -> {
                 System.out.println("Enter book name");
                 String title = scanner.nextLine();
                 library.borrowBook(currentUser, title);
 
             }
-            case 3 -> {
+            case 4 -> {
                 System.out.println("Enter book name");
                 String title = scanner.nextLine();
                 library.returnBook(currentUser, title);
