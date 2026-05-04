@@ -50,6 +50,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return "com.nology.Book: " +  this.title + ", Author: " + this.author;
+        return "Book: " +  this.title + ", Author: " + this.author;
     }
 }

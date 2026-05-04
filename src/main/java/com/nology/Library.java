@@ -87,8 +87,6 @@ public class Library {
 
 
 
-
-
     public boolean emailExists(String email) {
 
         for (int i = 0; i < users.size(); i++) {
@@ -129,6 +127,55 @@ public class Library {
         } else {
             System.out.println("User account already exists!");
         }
+    }
+
+
+    public void loadBooks(String filePath) {
+
+
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) { // reads each line in csv till there's no more lines
+
+                ArrayList<String> rowOfFields = new ArrayList<>();
+                StringBuilder currentField = new StringBuilder();
+                boolean insideQuote = false; // keeps track of leading/trailing quotation marks
+
+                if (line.contains("SubGenre") && line.contains("Publisher")) { // skip header
+                    continue;
+                }
+
+                for (int i = 0; i < line.length(); i++) {
+
+                    char character = line.charAt(i);
+                    if (character == '"') {
+
+                        insideQuote = !insideQuote;
+
+                    } else if (character == ',' && !insideQuote) { // checks for commas that aren't inside quotation marks
+
+                        rowOfFields.add(currentField.toString()); // adds the current row field built to a list
+                        currentField.delete(0, currentField.length()); // resets the currentField variable
+
+                    } else {
+                        currentField.append(character); // builds the field char by char
+                    }
+                }
+
+                rowOfFields.add(currentField.toString());
+
+                Book storedBook = new Book(rowOfFields.get(1), rowOfFields.get(2));
+                books.add(storedBook);
+
+            }
+
+
+
+        } catch (IOException e) {
+            System.out.println("Error reading file.");
+        }
+
     }
 
 
@@ -212,11 +259,14 @@ public class Library {
 
     public  void displayBooks(){
         if (books.isEmpty()){
+
             System.out.println("There are no books currently available in the library");
         } else {
             for (int i = 0; i < books.size(); i++) {
                 System.out.println(books.get(i));
+                System.out.println("=======================================");
             }
+            System.out.println("Books list length = " + books.size());
         }
     }
 
