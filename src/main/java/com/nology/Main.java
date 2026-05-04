@@ -127,19 +127,19 @@ public class Main {
         switch (userMenuOption) {
 
             case 1 -> {
-                library.displayBooks();
+                library.displayAvailableBooks();
             }
+//            case 2 -> {
+//                currentUser.listOfBorrowedBooks();
+//
+//            }
             case 2 -> {
-                currentUser.listOfBorrowedBooks();
-
-            }
-            case 3 -> {
                 System.out.println("Enter book name");
                 String title = scanner.nextLine();
                 library.borrowBook(currentUser, title);
 
             }
-            case 4 -> {
+            case 3 -> {
                 System.out.println("Enter book name");
                 String title = scanner.nextLine();
                 library.returnBook(currentUser, title);

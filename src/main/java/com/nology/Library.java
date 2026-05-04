@@ -258,16 +258,27 @@ public class Library {
     }
 
 
-    public  void displayBooks(){
+    public  void displayAvailableBooks(){
+
+        int newLength = 0;
         if (books.isEmpty()){
 
             System.out.println("There are no books currently available in the library");
         } else {
             for (int i = 0; i < books.size(); i++) {
-                System.out.println(books.get(i));
-                System.out.println("=======================================");
+
+                Book borrowedBook = books.get(i);
+
+                if(borrowedBook.isBorrowed()) {
+                } else {
+                    System.out.println(books.get(i));
+                    newLength++;
+                    System.out.println("=======================================");
+                }
+
             }
-            System.out.println("Books list length = " + books.size());
+
+            System.out.println("Number of Available books: " + newLength);
         }
     }
 
