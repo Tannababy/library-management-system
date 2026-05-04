@@ -14,8 +14,8 @@ public class Main {
         String usersFilePath = "src/main/java/com/nology/user/users.csv";
 
         Library myLibrary = new Library();
-
         myLibrary.loadUsers(usersFilePath);
+
 
         User currentUser = null;
 
@@ -72,6 +72,7 @@ public class Main {
 
         while (isRunning) {
 
+            myLibrary.displayUsers();
 
             displayUserMenu();
             int userOption = myScanner.nextInt();

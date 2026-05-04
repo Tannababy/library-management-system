@@ -19,6 +19,9 @@ public class Library {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 
+            writer.write("Username," + "Email," + "Password"); //rewrites header
+            writer.newLine();
+
             String name, email, password;
             for (int i = 0; i < users.size(); i++) {
 
@@ -50,10 +53,11 @@ public class Library {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 
             String line;
+            users.clear();
 
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) { // continuously reads a line of text from opened file
 
-                if (line.contains("Username")){
+                if (line.contains("Username")){ // skip header
                     continue;
                 }
 
@@ -61,7 +65,6 @@ public class Library {
                 List<String> row = Arrays.asList(values);
 
                 String userName, userEmail, userPassword;
-                for (int i = 0; i < row.size(); i++) {
 
                     userName = row.get(0);
                     userEmail = row.get(1);
@@ -70,7 +73,6 @@ public class Library {
                     User newUser = new User(userName, userEmail, userPassword);
                     users.add(newUser);
 
-                }
 
             }
 
@@ -79,6 +81,8 @@ public class Library {
             System.err.println("CSV file not found: " + e.getMessage());
             e.printStackTrace();
         }
+
+
     }
 
 
