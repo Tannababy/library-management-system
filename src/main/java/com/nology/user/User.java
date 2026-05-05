@@ -10,7 +10,7 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private boolean isAdmin;
+    private boolean isAdmin = false;
 
     private ArrayList<Book> borrowedBooks = new ArrayList<>();
 
@@ -63,6 +63,7 @@ public class User {
     public ArrayList<Book> getBorrowedBooks() {
         return borrowedBooks;
     }
+
 
     public String listOfBorrowedBooks() {
 

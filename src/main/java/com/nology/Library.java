@@ -79,7 +79,7 @@ public class Library {
                     userPassword = row.get(2);
 
 
-                    User newUser = new User(userName, userEmail, userPassword, false);
+                    User newUser = new User(userName, userEmail, userPassword, Boolean.parseBoolean(row.getLast()));
                     users.add(newUser);
 
 
@@ -232,6 +232,7 @@ public class Library {
                 libraryBook.setBorrowedByEmail(user.getEmail());
                 user.getBorrowedBooks().add(libraryBook);
                 libraryBook.increaseBorrowCount();
+                saveUsers("src/main/java/com/nology/user/users.csv");
 
                 System.out.println("Book: " + libraryBook.getTitle() + ", borrowed by user: " + libraryBook.getBorrowedByEmail());
                 return;
@@ -255,6 +256,7 @@ public class Library {
                 returnedBook.setBorrowed(false);
                 returnedBook.setBorrowedByEmail(null);
                 user.getBorrowedBooks().remove(returnedBook);
+                saveUsers("src/main/java/com/nology/user/users.csv");
 
                 System.out.println("Book: " + bookTitle + ", has been returned by user: " + user.getName());
                 return;
