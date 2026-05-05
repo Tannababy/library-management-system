@@ -320,7 +320,39 @@ public class Library {
 
     }
 
+    public void displayAllBooksWithBorrows() {
 
+        if (books.isEmpty()){
+
+            System.out.println("There are no books currently available in the library");
+        } else {
+
+            for (int i = 0; i < books.size(); i++) {
+
+                Book book = books.get(i);
+
+                String status = book.isBorrowed() ? "Borrowed" : "Available";
+
+                System.out.println("Title: " + book.getTitle());
+                System.out.println("Author: " + book.getAuthor());
+                System.out.println("Times Borrowed: " + book.getBorrowCount());
+                System.out.println("Status: " + status);
+                System.out.println("===========================");
+            }
+
+        }
+
+    }
+
+    public void createReport(User user) {
+
+        if (!(user.isAdmin())) {
+            System.out.println("Unauthorised access! Only Admin's can create reports!");
+        } else {
+
+            displayAllBooksWithBorrows();
+        }
+    }
 
 
 }
