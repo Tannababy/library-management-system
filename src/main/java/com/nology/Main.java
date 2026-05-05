@@ -1,5 +1,6 @@
 package com.nology;
 
+import com.nology.user.Admin;
 import com.nology.user.User;
 
 import java.util.Scanner;
@@ -34,20 +35,32 @@ public class Main {
                 String inputEmail = User.returnEmail();
                 String inputPassword = User.returnPassword();
 
-                // check for unique email
-                if (myLibrary.emailExists(inputEmail)) {
+                System.out.println("Are you an admin? (y/n)");
+                String input = myScanner.nextLine().toLowerCase().trim();
 
-                    System.out.println("This email has already been used, please use another one to create account");
+                if (input.equals("n")) {// check for unique email
+
+                    if (myLibrary.emailExists(inputEmail)) {
+
+                        System.out.println("This email has already been used, please use another one to create account");
 
 
+                    } else {
+
+                        // account creation
+                        User newUser = new User(inputName, inputEmail, inputPassword, false);
+                        myLibrary.addUserToUsersList(newUser);
+                        myLibrary.saveUsers(usersFilePath);
+                        currentUser = newUser;
+
+                    }
                 } else {
 
-                    // account creation
-                    User newUser = new User(inputName, inputEmail, inputPassword);
-                    myLibrary.addUserToUsersList(newUser);
+                    // admin account creation
+                    Admin newAdmin = new Admin(inputName, inputEmail, inputPassword, true);
+                    myLibrary.addUserToUsersList(newAdmin);
                     myLibrary.saveUsers(usersFilePath);
-                    currentUser = newUser;
-
+                    currentUser = newAdmin;
                 }
 
                 // Login
@@ -70,25 +83,49 @@ public class Main {
             }
         }
 
-        boolean isRunning = true;
 
-        while (isRunning) {
+        if (currentUser.isAdmin()) {
+
+            boolean isRunningAdmin = true;
+
+            while (isRunningAdmin) {
 
 
-            displayUserMenu();
-            int userOption = myScanner.nextInt();
-            myScanner.nextLine();
+                displayAdminMenu();
+                int adminOption = myScanner.nextInt();
+                myScanner.nextLine();
 
-            if (userOption == 0){
+                if (adminOption == 0){
 
-                isRunning = false;
-                System.out.println("Existing the application, bye!");
+                    isRunningAdmin = false;
+                    System.out.println("Existing the application, bye!");
+                }
+                else {
+
+                    handleAdminOptions(currentUser, adminOption, myLibrary, myScanner);
+                }
             }
-            else {
-                handleUserOptions(currentUser, userOption, myLibrary, myScanner);
+
+
+        } else {
+
+            boolean isRunning = true;
+
+            while (isRunning) {
+
+                displayUserMenu();
+                int userOption = myScanner.nextInt();
+                myScanner.nextLine();
+
+                if (userOption == 0){
+
+                    isRunning = false;
+                    System.out.println("Existing the application, bye!");
+                }
+                else {
+                    handleUserOptions(currentUser, userOption, myLibrary, myScanner);
+                }
             }
-
-
         }
 
 
@@ -121,6 +158,16 @@ public class Main {
 
     }
 
+    public static void displayAdminMenu() {
+
+
+        String menu = "MENU:\n1 - Display all books\n2 - Create Report\n0 - Exit";
+
+        System.out.println("-------------------------------");
+        System.out.println(menu);
+
+    }
+
     public static void handleUserOptions(User currentUser, int userMenuOption, Library library, Scanner scanner) {
 
 
@@ -143,6 +190,26 @@ public class Main {
                 System.out.println("Enter book name");
                 String title = scanner.nextLine();
                 library.returnBook(currentUser, title);
+
+            }
+
+        }
+
+
+    }
+
+    public static void handleAdminOptions(User currentUser, int userMenuOption, Library library, Scanner scanner) {
+
+
+        switch (userMenuOption) {
+
+            case 1 -> {
+
+                library.displayAllBooks();
+            }
+            case 2 -> {
+                System.out.println("Creating Report ....");
+                library.createReport(currentUser);
 
             }
 

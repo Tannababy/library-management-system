@@ -19,10 +19,11 @@ public class Library {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 
-            writer.write("Username," + "Email," + "Password"); //rewrites header
+            writer.write("Username," + "Email," + "Password," + "BooksBorrowed," + "IsAdmin"); //rewrites header
             writer.newLine();
 
-            String name, email, password;
+            String name, email, password, booksBorrowed;
+            boolean isAdmin;
             for (int i = 0; i < users.size(); i++) {
 
                 User user = users.get(i);
@@ -30,15 +31,22 @@ public class Library {
                 name = user.getName();
                 email = user.getEmail();
                 password = user.getPassword();
+                isAdmin = user.isAdmin();
+                if (!isAdmin) {
+                    booksBorrowed = user.listOfBorrowedBooks();
+                } else {
+                    booksBorrowed = "";
+                }
 
-                String row = name + "," + email + "," + password;
+
+                String row = name + "," + email + "," + password + "," + booksBorrowed + "," + isAdmin;
                 writer.write(row);
                 writer.newLine();
 
 
             }
 
-            System.out.println("Successfully saved users.");
+
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -57,7 +65,7 @@ public class Library {
 
             while ((line = reader.readLine()) != null) { // continuously reads a line of text from opened file
 
-                if (line.contains("Username")){ // skip header
+                if (line.contains("Username") && line.contains("Password")){ // skip header
                     continue;
                 }
 
@@ -70,7 +78,8 @@ public class Library {
                     userEmail = row.get(1);
                     userPassword = row.get(2);
 
-                    User newUser = new User(userName, userEmail, userPassword);
+
+                    User newUser = new User(userName, userEmail, userPassword, false);
                     users.add(newUser);
 
 
@@ -180,27 +189,27 @@ public class Library {
 
 
 
-    public void addBook(User user, Book book) {
-
-        if (!(user instanceof Admin)) {
-
-            System.out.println("You are not authorised to add books to library");
-
-        } else {
-            books.add(book);
-        }
-    }
-
-    public void deleteBook(User user, Book book) {
-
-        if (!(user instanceof Admin)) {
-
-            System.out.println("You are not authorised to remove books to library");
-
-        } else {
-            books.remove(book);
-        }
-    }
+//    public void addBook(User user, Book book) {
+//
+//        if (!(user instanceof Admin)) {
+//
+//            System.out.println("You are not authorised to add books to library");
+//
+//        } else {
+//            books.add(book);
+//        }
+//    }
+//
+//    public void deleteBook(User user, Book book) {
+//
+//        if (!(user instanceof Admin)) {
+//
+//            System.out.println("You are not authorised to remove books to library");
+//
+//        } else {
+//            books.remove(book);
+//        }
+//    }
 
     public void borrowBook(User user, String bookTitle) {
 
@@ -221,7 +230,7 @@ public class Library {
 
                 libraryBook.setBorrowed(true);
                 libraryBook.setBorrowedByEmail(user.getEmail());
-                user.borrowedBooks.add(libraryBook);
+                user.getBorrowedBooks().add(libraryBook);
                 libraryBook.increaseBorrowCount();
 
                 System.out.println("Book: " + libraryBook.getTitle() + ", borrowed by user: " + libraryBook.getBorrowedByEmail());
@@ -236,16 +245,16 @@ public class Library {
     public void returnBook(User user, String bookTitle) {
 
         // loops through users borrowed books list
-        for (int i = 0; i < user.borrowedBooks.size(); i++) {
+        for (int i = 0; i < user.getBorrowedBooks().size(); i++) {
 
-            Book returnedBook = user.borrowedBooks.get(i);
+            Book returnedBook = user.getBorrowedBooks().get(i);
 
             // checks if given bookTitle matches a book in the list of users borrowed books
             if (bookTitle.trim().equalsIgnoreCase(returnedBook.getTitle())) {
 
                 returnedBook.setBorrowed(false);
                 returnedBook.setBorrowedByEmail(null);
-                user.borrowedBooks.remove(returnedBook);
+                user.getBorrowedBooks().remove(returnedBook);
 
                 System.out.println("Book: " + bookTitle + ", has been returned by user: " + user.getName());
                 return;
@@ -283,16 +292,35 @@ public class Library {
     }
 
 
-    public void displayUsers(){
+//    public void displayUsers(){
+//
+//        if (users.isEmpty()){
+//            System.out.println("There are no books currently available in the library");
+//        } else {
+//            for (int i = 0; i < users.size(); i++) {
+//                System.out.println(users.get(i));
+//            }
+//        }
+//
+//    }
 
-        if (users.isEmpty()){
+    public void displayAllBooks() {
+
+        if (books.isEmpty()){
+
             System.out.println("There are no books currently available in the library");
         } else {
-            for (int i = 0; i < users.size(); i++) {
-                System.out.println(users.get(i));
+            for (int i = 0; i < books.size(); i++) {
+
+                System.out.println(books.get(i));
+                System.out.println("=======================================");
+                }
+
             }
-        }
 
     }
+
+
+
 
 }

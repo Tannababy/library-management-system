@@ -10,15 +10,18 @@ public class User {
     private String name;
     private String email;
     private String password;
-    public ArrayList<Book> borrowedBooks = new ArrayList<>();
+    private boolean isAdmin;
+
+    private ArrayList<Book> borrowedBooks = new ArrayList<>();
 
     static Scanner userScanner = new Scanner(System.in);
 
 
-    public User(String name, String email, String password) {
+    public User(String name, String email, String password, boolean isAdmin) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
 
     public static String returnName() {
@@ -53,20 +56,39 @@ public class User {
     }
 
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public ArrayList<Book> getBorrowedBooks() {
+        return borrowedBooks;
+    }
+
+    public String listOfBorrowedBooks() {
+
+        StringBuilder listOfBooks = new StringBuilder();
+        if (borrowedBooks.isEmpty()) {
+
+            return "";
+
+        } else {
+            for (Book book : borrowedBooks) {
+
+                listOfBooks.append(book.getTitle());
+                listOfBooks.append("|");
+                listOfBooks.append(book.getAuthor());
+                if (book != borrowedBooks.getLast()){
+                    listOfBooks.append(";");
+                }
+            }
+        }
+        return listOfBooks.toString();
+    }
+
+
     @Override
     public String toString() {
         return "User: " +  this.getName() + ", Email: " + this.getEmail();
     }
 
-    public void listOfBorrowedBooks() {
-
-        if (borrowedBooks.isEmpty()) {
-            System.out.println("There are no books currently borrowed by this user");
-        } else {
-            for (Book book : borrowedBooks) {
-
-                System.out.println(book.toString());
-            }
-        }
-    }
 }

@@ -51,6 +51,10 @@ public class Book {
         this.borrowedByEmail = borrowedByEmail;
     }
 
+    public int getBorrowCount() {
+        return borrowCount;
+    }
+
     public void increaseBorrowCount() {
         this.borrowCount++;
     }
@@ -58,7 +62,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book: " +  this.title + ", Author: " + this.author;
+        return "Book: " +  this.getTitle() + ", Author: " + this.getAuthor() + ", Available: " + !this.isBorrowed();
     }
 
 
