@@ -1,0 +1,962 @@
+[
+  {
+    "author": "Goswami, Jaideva",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 1,
+    "title": "Fundamentals of Wavelets",
+    "isBorrowed": false
+  },
+  {
+    "author": "Foreman, John",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 2,
+    "title": "Data Smart",
+    "isBorrowed": false
+  },
+  {
+    "author": "Hawking, Stephen",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 3,
+    "title": "God Created the Integers",
+    "isBorrowed": false
+  },
+  {
+    "author": "Dubner, Stephen",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 4,
+    "title": "Superfreakonomics",
+    "isBorrowed": false
+  },
+  {
+    "author": "Said, Edward",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 5,
+    "title": "Orientalism",
+    "isBorrowed": false
+  },
+  {
+    "author": "Vapnik, Vladimir",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 6,
+    "title": "Nature of Statistical Learning Theory, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Menon, V P",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 7,
+    "title": "Integration of the Indian States",
+    "isBorrowed": false
+  },
+  {
+    "author": "Mlodinow, Leonard",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 8,
+    "title": "Drunkard's Walk, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Shih, Frank",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 9,
+    "title": "Image Processing & Mathematical Morphology",
+    "isBorrowed": false
+  },
+  {
+    "author": "Konnikova, Maria",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 10,
+    "title": "How to Think Like Sherlock Holmes",
+    "isBorrowed": false
+  },
+  {
+    "author": "Sebastian Gutierrez",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 11,
+    "title": "Data Scientists at Work",
+    "isBorrowed": false
+  },
+  {
+    "author": "Vonnegut, Kurt",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 12,
+    "title": "Slaughterhouse Five",
+    "isBorrowed": false
+  },
+  {
+    "author": "Villani, Cedric",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 13,
+    "title": "Birth of a Theorem",
+    "isBorrowed": false
+  },
+  {
+    "author": "Sussman, Gerald",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 14,
+    "title": "Structure & Interpretation of Computer Programs",
+    "isBorrowed": false
+  },
+  {
+    "author": "Eraly, Abraham",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 15,
+    "title": "Age of Wrath, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Kafka, Frank",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 16,
+    "title": "Trial, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Pratt, John",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 17,
+    "title": "Statistical Decision Theory'",
+    "isBorrowed": false
+  },
+  {
+    "author": "Nisbet, Robert",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 18,
+    "title": "Data Mining Handbook",
+    "isBorrowed": false
+  },
+  {
+    "author": "Wells, H. G.",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 19,
+    "title": "New Machiavelli, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Heisenberg, Werner",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 20,
+    "title": "Physics & Philosophy",
+    "isBorrowed": false
+  },
+  {
+    "author": "Oram, Andy",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 21,
+    "title": "Making Software",
+    "isBorrowed": false
+  },
+  {
+    "author": "Tao, Terence",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 22,
+    "title": "Analysis, Vol I",
+    "isBorrowed": false
+  },
+  {
+    "author": "Conway, Drew",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 23,
+    "title": "Machine Learning for Hackers",
+    "isBorrowed": false
+  },
+  {
+    "author": "Silver, Nate",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 24,
+    "title": "Signal and the Noise, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "McKinney, Wes",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 25,
+    "title": "Python for Data Analysis",
+    "isBorrowed": false
+  },
+  {
+    "author": "Cormen, Thomas",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 26,
+    "title": "Introduction to Algorithms",
+    "isBorrowed": false
+  },
+  {
+    "author": "Deb, Siddhartha",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 27,
+    "title": "Beautiful and the Damned, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Camus, Albert",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 28,
+    "title": "Outsider, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Doyle, Arthur Conan",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 29,
+    "title": "Complete Sherlock Holmes, The - Vol I",
+    "isBorrowed": false
+  },
+  {
+    "author": "Doyle, Arthur Conan",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 30,
+    "title": "Complete Sherlock Holmes, The - Vol II",
+    "isBorrowed": false
+  },
+  {
+    "author": "Smith, Adam",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 31,
+    "title": "Wealth of Nations, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Follett, Ken",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 32,
+    "title": "Pillars of the Earth, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Hitler, Adolf",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 33,
+    "title": "Mein Kampf",
+    "isBorrowed": false
+  },
+  {
+    "author": "Capra, Fritjof",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 34,
+    "title": "Tao of Physics, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Feynman, Richard",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 35,
+    "title": "Surely You're Joking Mr Feynman",
+    "isBorrowed": false
+  },
+  {
+    "author": "Hemingway, Ernest",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 36,
+    "title": "Farewell to Arms, A",
+    "isBorrowed": false
+  },
+  {
+    "author": "Forsyth, Frederick",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 37,
+    "title": "Veteran, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Archer, Jeffery",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 38,
+    "title": "False Impressions",
+    "isBorrowed": false
+  },
+  {
+    "author": "Pausch, Randy",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 39,
+    "title": "Last Lecture, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Rand, Ayn",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 40,
+    "title": "Return of the Primitive",
+    "isBorrowed": false
+  },
+  {
+    "author": "Crichton, Michael",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 41,
+    "title": "Jurassic Park",
+    "isBorrowed": false
+  },
+  {
+    "author": "Steinbeck, John",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 42,
+    "title": "Russian Journal, A",
+    "isBorrowed": false
+  },
+  {
+    "author": "Poe, Edgar Allen",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 43,
+    "title": "Tales of Mystery and Imagination",
+    "isBorrowed": false
+  },
+  {
+    "author": "Dubner, Stephen",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 44,
+    "title": "Freakonomics",
+    "isBorrowed": false
+  },
+  {
+    "author": "Capra, Fritjof",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 45,
+    "title": "Hidden Connections, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Durant, Will",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 46,
+    "title": "Story of Philosophy, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Deshpande, P L",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 47,
+    "title": "Asami Asami",
+    "isBorrowed": false
+  },
+  {
+    "author": "Steinbeck, John",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 48,
+    "title": "Journal of a Novel",
+    "isBorrowed": false
+  },
+  {
+    "author": "Steinbeck, John",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 49,
+    "title": "Once There Was a War",
+    "isBorrowed": false
+  },
+  {
+    "author": "Steinbeck, John",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 50,
+    "title": "Moon is Down, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Grisham, John",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 51,
+    "title": "Brethren, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Naipaul, V. S.",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 52,
+    "title": "In a Free State",
+    "isBorrowed": false
+  },
+  {
+    "author": "Heller, Joseph",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 53,
+    "title": "Catch 22",
+    "isBorrowed": false
+  },
+  {
+    "author": "BBC",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 54,
+    "title": "Complete Mastermind, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Dylan, Bob",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 55,
+    "title": "Dylan on Dylan",
+    "isBorrowed": false
+  },
+  {
+    "author": "Gupta, Madan",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 56,
+    "title": "Soft Computing & Intelligent Systems",
+    "isBorrowed": false
+  },
+  {
+    "author": "Stonier, Alfred",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 57,
+    "title": "Textbook of Economic Theory",
+    "isBorrowed": false
+  },
+  {
+    "author": "Greene, W. H.",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 58,
+    "title": "Econometric Analysis",
+    "isBorrowed": false
+  },
+  {
+    "author": "Bradsky, Gary",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 59,
+    "title": "Learning OpenCV",
+    "isBorrowed": false
+  },
+  {
+    "author": "Tanenbaum, Andrew",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 60,
+    "title": "Data Structures Using C & C++",
+    "isBorrowed": false
+  },
+  {
+    "author": "Forsyth, David",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 61,
+    "title": "Computer Vision, A Modern Approach",
+    "isBorrowed": false
+  },
+  {
+    "author": "Taub, Schilling",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 62,
+    "title": "Principles of Communication Systems",
+    "isBorrowed": false
+  },
+  {
+    "author": "Kanetkar, Yashwant",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 63,
+    "title": "Let Us C",
+    "isBorrowed": false
+  },
+  {
+    "author": "Stroud, Jonathan",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 64,
+    "title": "Amulet of Samarkand, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Dostoevsky, Fyodor",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 65,
+    "title": "Crime and Punishment",
+    "isBorrowed": false
+  },
+  {
+    "author": "Brown, Dan",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 66,
+    "title": "Angels & Demons",
+    "isBorrowed": false
+  },
+  {
+    "author": "Sen, Amartya",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 67,
+    "title": "Argumentative Indian, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Ghosh, Amitav",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 68,
+    "title": "Sea of Poppies",
+    "isBorrowed": false
+  },
+  {
+    "author": "Sen, Amartya",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 69,
+    "title": "Idea of Justice, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Hansberry, Lorraine",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 70,
+    "title": "Raisin in the Sun, A",
+    "isBorrowed": false
+  },
+  {
+    "author": "Woodward, Bob",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 71,
+    "title": "All the President's Men",
+    "isBorrowed": false
+  },
+  {
+    "author": "Archer, Jeffery",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 72,
+    "title": "Prisoner of Birth, A",
+    "isBorrowed": false
+  },
+  {
+    "author": "Nayar, Kuldip",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 73,
+    "title": "Scoop!",
+    "isBorrowed": false
+  },
+  {
+    "author": "Deshpande, Sunita",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 74,
+    "title": "Ahe Manohar Tari",
+    "isBorrowed": false
+  },
+  {
+    "author": "Dalrymple, William",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 75,
+    "title": "Last Mughal, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Various",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 76,
+    "title": "Social Choice & Welfare, Vol 39 No. 1",
+    "isBorrowed": false
+  },
+  {
+    "author": "Deshpande, P L",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 77,
+    "title": "Radiowaril Bhashane & Shrutika",
+    "isBorrowed": false
+  },
+  {
+    "author": "Deshpande, P L",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 78,
+    "title": "Gun Gayin Awadi",
+    "isBorrowed": false
+  },
+  {
+    "author": "Deshpande, P L",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 79,
+    "title": "Aghal Paghal",
+    "isBorrowed": false
+  },
+  {
+    "author": "Garg, Sanjay",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 80,
+    "title": "Maqta-e-Ghalib",
+    "isBorrowed": false
+  },
+  {
+    "author": "No Author",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 81,
+    "title": "Beyond Degrees",
+    "isBorrowed": false
+  },
+  {
+    "author": "Kale, V P",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 82,
+    "title": "Manasa",
+    "isBorrowed": false
+  },
+  {
+    "author": "Tharoor, Shashi",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 83,
+    "title": "India from Midnight to Milennium",
+    "isBorrowed": false
+  },
+  {
+    "author": "John Doe",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 84,
+    "title": "World's Greatest Trials, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Tharoor, Shashi",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 85,
+    "title": "Great Indian Novel, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Lapierre, Dominique",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 86,
+    "title": "O Jerusalem!",
+    "isBorrowed": false
+  },
+  {
+    "author": "Lapierre, Dominique",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 87,
+    "title": "City of Joy, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Lapierre, Dominique",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 88,
+    "title": "Freedom at Midnight",
+    "isBorrowed": false
+  },
+  {
+    "author": "Steinbeck, John",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 89,
+    "title": "Winter of Our Discontent, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Russell, Bertrand",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 90,
+    "title": "On Education",
+    "isBorrowed": false
+  },
+  {
+    "author": "Harris, Sam",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 91,
+    "title": "Free Will",
+    "isBorrowed": false
+  },
+  {
+    "author": "Tharoor, Shashi",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 92,
+    "title": "Bookless in Baghdad",
+    "isBorrowed": false
+  },
+  {
+    "author": "Gardner, Earle Stanley",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 93,
+    "title": "Case of the Lame Canary, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Hawking, Stephen",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 94,
+    "title": "Theory of Everything, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Drucker, Peter",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 95,
+    "title": "New Markets & Other Essays",
+    "isBorrowed": false
+  },
+  {
+    "author": "Bodanis, David",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 96,
+    "title": "Electric Universe",
+    "isBorrowed": false
+  },
+  {
+    "author": "Hugo, Victor",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 97,
+    "title": "Hunchback of Notre Dame, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Steinbeck, John",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 98,
+    "title": "Burning Bright",
+    "isBorrowed": false
+  },
+  {
+    "author": "Drucker, Peter",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 99,
+    "title": "Age of Discontuinity, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Gordon, Richard",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 100,
+    "title": "Doctor in the Nude",
+    "isBorrowed": false
+  },
+  {
+    "author": "Orwell, George",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 101,
+    "title": "Down and Out in Paris & London",
+    "isBorrowed": false
+  },
+  {
+    "author": "Sen, Amartya",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 102,
+    "title": "Identity & Violence",
+    "isBorrowed": false
+  },
+  {
+    "author": "Dalrymple, William",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 103,
+    "title": "Beyond the Three Seas",
+    "isBorrowed": false
+  },
+  {
+    "author": "No Author",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 104,
+    "title": "World's Greatest Short Stories, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Iacoca, Lee",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 105,
+    "title": "Talking Straight",
+    "isBorrowed": false
+  },
+  {
+    "author": "Maugham, William S",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 106,
+    "title": "Maugham's Collected Short Stories, Vol 3",
+    "isBorrowed": false
+  },
+  {
+    "author": "Forsyth, Frederick",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 107,
+    "title": "Phantom of Manhattan, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Maugham, William S",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 108,
+    "title": "Ashenden of The British Agent",
+    "isBorrowed": false
+  },
+  {
+    "author": "Pirsig, Robert",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 109,
+    "title": "Zen & The Art of Motorcycle Maintenance",
+    "isBorrowed": false
+  },
+  {
+    "author": "Fisk, Robert",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 110,
+    "title": "Great War for Civilization, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Rand, Ayn",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 111,
+    "title": "We the Living",
+    "isBorrowed": false
+  },
+  {
+    "author": "Aczel, Amir",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 112,
+    "title": "Artist and the Mathematician, The",
+    "isBorrowed": false
+  },
+  {
+    "author": "Russell, Bertrand",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 113,
+    "title": "History of Western Philosophy",
+    "isBorrowed": false
+  },
+  {
+    "author": "No Author",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 114,
+    "title": "Selected Short Stories",
+    "isBorrowed": false
+  },
+  {
+    "author": "Sen, Amartya",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 115,
+    "title": "Rationality & Freedom",
+    "isBorrowed": false
+  },
+  {
+    "author": "Huntington, Samuel",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 116,
+    "title": "Clash of Civilizations and Remaking of the World Order",
+    "isBorrowed": false
+  },
+  {
+    "author": "Capra, Fritjof",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 117,
+    "title": "Uncommon Wisdom",
+    "isBorrowed": false
+  },
+  {
+    "author": "Bach, Richard",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 118,
+    "title": "One",
+    "isBorrowed": false
+  },
+  {
+    "author": "Marx, Karl",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 119,
+    "title": "Karl Marx Biography",
+    "isBorrowed": false
+  },
+  {
+    "author": "Braithwaite",
+    "borrowCount": 0,
+    "borrowedBy": "",
+    "id": 120,
+    "title": "To Sir With Love",
+    "isBorrowed": false
+  }
+]

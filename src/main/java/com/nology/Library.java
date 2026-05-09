@@ -2,6 +2,8 @@ package com.nology;
 
 import com.nology.user.Admin;
 import com.nology.user.User;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -19,10 +21,10 @@ public class Library {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 
-            writer.write("Username," + "Email," + "Password," + "BooksBorrowed," + "IsAdmin"); //rewrites header
+            writer.write("Username," + "Email," + "Password," + "BooksBorrowedById," + "IsAdmin"); //rewrites header
             writer.newLine();
 
-            String name, email, password, booksBorrowed;
+            String name, email, password, booksBorrowedById = "";
             boolean isAdmin;
             for (int i = 0; i < users.size(); i++) {
 
@@ -32,23 +34,27 @@ public class Library {
                 email = user.getEmail();
                 password = user.getPassword();
                 isAdmin = user.isAdmin();
+
                 if (!isAdmin) {
-                    booksBorrowed = user.listOfBorrowedBooks();
+
+                    booksBorrowedById = user.getBorrowedBooksIds();
+                    String row = name + "," + email + "," + password + "," + booksBorrowedById + "," + isAdmin;
+                    writer.write(row);
+                    writer.newLine();
                 } else {
-                    booksBorrowed = "";
+
+                    String row = name + "," + email + "," + password + "," + "[ ]" + "," + isAdmin;
+                    writer.write(row);
+                    writer.newLine();
                 }
 
-
-                String row = name + "," + email + "," + password + "," + booksBorrowed + "," + isAdmin;
-                writer.write(row);
-                writer.newLine();
 
 
             }
 
 
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.err.println("An error occurred.");
             e.printStackTrace();
         }
 
@@ -57,6 +63,7 @@ public class Library {
 
     public void loadUsers(String filePath) {
 
+        users.clear();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 
@@ -65,23 +72,48 @@ public class Library {
 
             while ((line = reader.readLine()) != null) { // continuously reads a line of text from opened file
 
-                if (line.contains("Username") && line.contains("Password")){ // skip header
+                if (line.contains("Username") && line.contains("Password")) { // skip header
                     continue;
                 }
 
                 String[] values = line.split(",");
                 List<String> row = Arrays.asList(values);
 
-                String userName, userEmail, userPassword;
+                String userName, userEmail, userPassword, userBorrowedBooks;
 
-                    userName = row.get(0);
-                    userEmail = row.get(1);
-                    userPassword = row.get(2);
+                userName = row.get(0);
+                userEmail = row.get(1);
+                userPassword = row.get(2);
+                userBorrowedBooks = row.get(3);
+                // [ 1, 2, 3, 5, 23 ]
+                ArrayList<Book> usersBorrowedBooksList = new ArrayList<>();
+
+                if (!userBorrowedBooks.trim().equals("[]") && !userBorrowedBooks.trim().isEmpty())  {
+
+                    usersBorrowedBooksList = new ArrayList<>();
+
+                    userBorrowedBooks = userBorrowedBooks.replace("[","").replace("]","");
+
+                    String[] listOfIds = userBorrowedBooks.split(",");
+
+                    for (int i = 0; i < listOfIds.length; i++) {
+
+                        int id =  Integer.parseInt(listOfIds[i].trim());
+
+                        for (int j = 0; j < books.size(); j++) {
+
+                            if (books.get(j).getId() == id) {
+
+                                usersBorrowedBooksList.add(books.get(j));
+                            }
+                        }
+                    }
+
+                }
 
 
-                    User newUser = new User(userName, userEmail, userPassword, Boolean.parseBoolean(row.getLast()));
-                    users.add(newUser);
-
+                User newUser = new User(userName, userEmail, userPassword, Boolean.parseBoolean(row.getLast()), usersBorrowedBooksList);
+                users.add(newUser);
 
             }
 
@@ -139,43 +171,73 @@ public class Library {
     }
 
 
+
+    public JSONArray buildBooksJson() {
+
+        JSONArray booksArrJson = new JSONArray();
+
+        for (int i = 0; i < books.size(); i++) {
+
+            Book librarybook = books.get(i);
+
+            JSONObject jsonBook = new JSONObject();
+
+            jsonBook.put("id", librarybook.getId());
+            jsonBook.put("title", librarybook.getTitle());
+            jsonBook.put("author", librarybook.getAuthor());
+            jsonBook.put("isBorrowed", librarybook.isBorrowed());
+            jsonBook.put("borrowedBy", librarybook.getBorrowedByEmail());
+            jsonBook.put("borrowCount", librarybook.getBorrowCount());
+
+            booksArrJson.put(jsonBook);
+        }
+
+        return booksArrJson;
+
+    }
+
+
+    public void writeToJsonFile(String filepath) {
+
+        JSONArray jsonArray = buildBooksJson();
+
+
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filepath))){
+
+            bufferedWriter.write(jsonArray.toString(2));
+
+        } catch (IOException e) {
+
+            System.err.println("JSON file not found: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
     public void loadBooks(String filePath) {
 
+        books.clear();
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
 
             String line;
+            boolean isFirstLine = true;
+
             while ((line = bufferedReader.readLine()) != null) { // reads each line in csv till there's no more lines
 
-                ArrayList<String> rowOfFields = new ArrayList<>();
-                StringBuilder currentField = new StringBuilder();
-                boolean insideQuote = false; // keeps track of leading/trailing quotation marks
-
-                if (line.contains("SubGenre") && line.contains("Publisher")) { // skip header
+                if (isFirstLine) {
+                    isFirstLine = false;
                     continue;
                 }
 
-                for (int i = 0; i < line.length(); i++) {
+                ArrayList<String> rowOfFields = getFields(line);
 
-                    char character = line.charAt(i);
-                    if (character == '"') {
+                int id = Integer.parseInt(rowOfFields.get(0));
+                String title = rowOfFields.get(1);
+                String author = (rowOfFields.get(2).isEmpty()) ? "No Author" : rowOfFields.get(2);
 
-                        insideQuote = !insideQuote;
-
-                    } else if (character == ',' && !insideQuote) { // checks for commas that aren't inside quotation marks
-
-                        rowOfFields.add(currentField.toString()); // adds the current row field built to a list
-                        currentField.delete(0, currentField.length()); // resets the currentField variable
-
-                    } else {
-                        currentField.append(character); // builds the field char by char
-                    }
-                }
-
-                rowOfFields.add(currentField.toString());
-
-                Book storedBook = new Book(rowOfFields.get(1), rowOfFields.get(2), false, null);
-                books.add(storedBook);
+                Book libraryBook = new Book(id, title, author, false, null, 0);
+                books.add(libraryBook);
 
             }
 
@@ -187,6 +249,33 @@ public class Library {
 
     }
 
+    private static ArrayList<String> getFields(String line) {
+
+        ArrayList<String> rowOfFields = new ArrayList<>();
+        StringBuilder currentField = new StringBuilder();
+        boolean insideQuote = false; // keeps track of leading/trailing quotation marks
+
+
+        for (int i = 0; i < line.length(); i++) {
+
+            char character = line.charAt(i);
+            if (character == '"') {
+
+                insideQuote = !insideQuote;
+
+            } else if (character == ',' && !insideQuote) { // checks for commas that aren't inside quotation marks
+
+                rowOfFields.add(currentField.toString()); // adds the current row field built to a list
+                currentField.delete(0, currentField.length()); // resets the currentField variable
+
+            } else {
+                currentField.append(character); // builds the field char by char
+            }
+        }
+
+        rowOfFields.add(currentField.toString());
+        return rowOfFields;
+    }
 
 
 //    public void addBook(User user, Book book) {
@@ -233,6 +322,7 @@ public class Library {
                 user.getBorrowedBooks().add(libraryBook);
                 libraryBook.increaseBorrowCount();
                 saveUsers("src/main/java/com/nology/user/users.csv");
+//                saveBooksCSV("src/main/java/com/nology/libray_books.csv");
 
                 System.out.println("Book: " + libraryBook.getTitle() + ", borrowed by user: " + libraryBook.getBorrowedByEmail());
                 return;
@@ -257,6 +347,7 @@ public class Library {
                 returnedBook.setBorrowedByEmail(null);
                 user.getBorrowedBooks().remove(returnedBook);
                 saveUsers("src/main/java/com/nology/user/users.csv");
+//                saveBooksCSV("src/main/java/com/nology/libray_books.csv");
 
                 System.out.println("Book: " + bookTitle + ", has been returned by user: " + user.getName());
                 return;
@@ -322,26 +413,49 @@ public class Library {
 
     }
 
-    public void displayAllBooksWithBorrows() {
+    public void displayCurrentlyBorrowedBooks() {
 
         if (books.isEmpty()){
 
             System.out.println("There are no books currently available in the library");
         } else {
 
+            System.out.println("All the books listed below are currently out on loan.");
             for (int i = 0; i < books.size(); i++) {
 
                 Book book = books.get(i);
 
-                String status = book.isBorrowed() ? "Borrowed" : "Available";
+                if (book.isBorrowed()) {
 
-                System.out.println("Title: " + book.getTitle());
-                System.out.println("Author: " + book.getAuthor());
-                System.out.println("Times Borrowed: " + book.getBorrowCount());
-                System.out.println("Status: " + status);
-                System.out.println("===========================");
+                    System.out.println("==========================================");
+                    System.out.println("Title: " + book.getTitle());
+                    System.out.println("Author: " + book.getAuthor());
+                    System.out.println("Times Borrowed: " + book.getBorrowCount());
+                    System.out.println("Status: Borrowed");
+                    System.out.println("==========================================");
+                }
             }
 
+        }
+
+    }
+
+    public void displayAllBooksBorrowCount() {
+
+        if (books.isEmpty()) {
+            System.out.println("There are no books currently available in the library");
+        } else {
+            System.out.println("Below is a complete list of books with their borrow count and loan status.");
+            for (int j = 0; j < books.size(); j++) {
+
+                String status = books.get(j).isBorrowed() ? "Borrowed" : "Available";
+
+                System.out.println("Title: " + books.get(j).getTitle());
+                System.out.println("Author: " + books.get(j).getAuthor());
+                System.out.println("Times Borrowed: " + books.get(j).getBorrowCount());
+                System.out.println("Status: " + status);
+                System.out.println("==========================================");
+            }
         }
 
     }
@@ -352,7 +466,10 @@ public class Library {
             System.out.println("Unauthorised access! Only Admin's can create reports!");
         } else {
 
-            displayAllBooksWithBorrows();
+            System.out.println("Report on the current state of the books in the library");
+            System.out.println("==========================================");
+            displayCurrentlyBorrowedBooks();
+            displayAllBooksBorrowCount();
         }
     }
 

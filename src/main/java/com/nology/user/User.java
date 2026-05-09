@@ -3,6 +3,8 @@ package com.nology.user;
 import com.nology.Book;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class User {
@@ -18,11 +20,20 @@ public class User {
 
 
     public User(String name, String email, String password, boolean isAdmin) {
+
         this.name = name;
         this.email = email;
         this.password = password;
         this.isAdmin = isAdmin;
     }
+
+    public User(String name, String email, String password, boolean isAdmin, ArrayList<Book> borrowedBooks) {
+
+        this(name,email, password, isAdmin);
+        this.borrowedBooks = borrowedBooks;
+    }
+
+
 
     public static String returnName() {
 
@@ -64,27 +75,46 @@ public class User {
         return borrowedBooks;
     }
 
+    public String getBorrowedBooksIds() {
 
-    public String listOfBorrowedBooks() {
-
-        StringBuilder listOfBooks = new StringBuilder();
         if (borrowedBooks.isEmpty()) {
-
             return "";
-
-        } else {
-            for (Book book : borrowedBooks) {
-
-                listOfBooks.append(book.getTitle());
-                listOfBooks.append("|");
-                listOfBooks.append(book.getAuthor());
-                if (book != borrowedBooks.getLast()){
-                    listOfBooks.append(";");
-                }
-            }
         }
-        return listOfBooks.toString();
+
+        int[] listOfBookIds = new int[borrowedBooks.size()];
+
+        for (int j = 0; j < borrowedBooks.size(); j++) {
+
+            int bookRef = borrowedBooks.get(j).getId();
+            listOfBookIds[j] = bookRef;
+        }
+
+
+
+        return Arrays.toString(listOfBookIds);
     }
+
+
+//    public String listOfBorrowedBooks() {
+//
+//        StringBuilder listOfBooks = new StringBuilder();
+//        if (borrowedBooks.isEmpty()) {
+//
+//            return "";
+//
+//        } else {
+//            for (Book book : borrowedBooks) {
+//
+//                listOfBooks.append(book.getTitle());
+//                listOfBooks.append("|");
+//                listOfBooks.append(book.getAuthor());
+//                if (book != borrowedBooks.getLast()){
+//                    listOfBooks.append(";");
+//                }
+//            }
+//        }
+//        return listOfBooks.toString();
+//    }
 
 
     @Override

@@ -4,6 +4,7 @@ import com.nology.user.User;
 
 public class Book {
 
+    private int id;
     private String title;
     private String author;
     private boolean isBorrowed;
@@ -11,12 +12,18 @@ public class Book {
     private int borrowCount;
 
     // constructor - 2 args
-    public Book(String title, String author, boolean isBorrowed, String borrowedByEmail) {
+    public Book(int id, String title, String author, boolean isBorrowed, String borrowedByEmail, int borrowCount) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.isBorrowed = isBorrowed;
         this.borrowedByEmail = "";
-        this.borrowCount = 0;
+        this.borrowCount = borrowCount;
+    }
+
+
+    public int getId() {
+        return this.id;
     }
 
     public String getTitle() {
@@ -62,7 +69,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book: " +  this.getTitle() + ", Author: " + this.getAuthor() + ", Available: " + !this.isBorrowed();
+        return "ID: " + this.getId() + ", Title: " + this.getTitle() + ", Author: " + this.getAuthor() + ", Available: " + !this.isBorrowed();
     }
 
 

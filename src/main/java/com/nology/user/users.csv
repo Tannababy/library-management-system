@@ -1,5 +1,5 @@
 Username,Email,Password,BooksBorrowed,IsAdmin
 Lotanna,tanna@yahoo.com,1234qwer,,false
-April,aprilsworld@hotmail.com,pass1234,Bookless in Baghdad|Tharoor, Shashi,false
+April,aprilsworld@hotmail.com,pass1234,,false
 Stephanie,steph@yahoo.com,password123,,false
 Emeka,emeks12@hotmail.com,password12345,,false

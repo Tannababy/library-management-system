@@ -14,10 +14,12 @@ public class Main {
 
         String usersFilePath = "src/main/java/com/nology/user/users.csv";
         String booksFilePath = "src/main/java/com/nology/books_data.csv";
+        String booksJsonPath = "src/main/java/com/nology/books.json";
 
         Library myLibrary = new Library();
-        myLibrary.loadUsers(usersFilePath);
         myLibrary.loadBooks(booksFilePath);
+        myLibrary.writeToJsonFile(booksJsonPath);
+        myLibrary.loadUsers(usersFilePath);
 
 
         User currentUser = null;
@@ -38,9 +40,9 @@ public class Main {
                 System.out.println("Are you an admin? (y/n)");
                 String input = myScanner.nextLine().toLowerCase().trim();
 
-                if (input.equals("n")) {// check for unique email
+                if (input.equals("n")) {
 
-                    if (myLibrary.emailExists(inputEmail)) {
+                    if (myLibrary.emailExists(inputEmail)) { // check for unique email
 
                         System.out.println("This email has already been used, please use another one to create account");
 
@@ -97,12 +99,14 @@ public class Main {
 
                 if (adminOption == 0){
 
+                    myLibrary.writeToJsonFile(booksJsonPath);
+
                     isRunningAdmin = false;
                     System.out.println("Existing the application, bye!");
                 }
                 else {
 
-                    handleAdminOptions(currentUser, adminOption, myLibrary, myScanner);
+                    handleAdminOptions(currentUser, adminOption, myLibrary);
                 }
             }
 
@@ -185,6 +189,7 @@ public class Main {
                 String title = scanner.nextLine();
                 library.borrowBook(currentUser, title);
 
+
             }
             case 3 -> {
                 System.out.println("Enter book name");
@@ -198,7 +203,7 @@ public class Main {
 
     }
 
-    public static void handleAdminOptions(User currentUser, int userMenuOption, Library library, Scanner scanner) {
+    public static void handleAdminOptions(User currentUser, int userMenuOption, Library library) {
 
 
         switch (userMenuOption) {
