@@ -9,11 +9,11 @@
   },
   {
     "author": "Foreman, John",
-    "borrowCount": 0,
+    "borrowCount": 2,
     "borrowedBy": "",
     "id": 2,
     "title": "Data Smart",
-    "isBorrowed": false
+    "isBorrowed": true
   },
   {
     "author": "Hawking, Stephen",

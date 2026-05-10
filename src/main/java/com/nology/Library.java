@@ -16,6 +16,88 @@ public class Library {
     private ArrayList<User> users = new ArrayList<>();
 
 
+    public void loadBooksFromJson(String filePath) {
+
+        books.clear();
+
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
+
+            StringBuilder fullBookJsonArr = new StringBuilder();
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                fullBookJsonArr.append(line);
+            }
+
+            JSONArray listOfBooksJson = new JSONArray(fullBookJsonArr.toString());
+
+            for (int i = 0; i < listOfBooksJson.length(); i++) {
+
+                JSONObject bookObj = listOfBooksJson.getJSONObject(i);
+
+                int bookId = bookObj.getInt("id");
+                String title = bookObj.getString("title");
+                String author = bookObj.getString("author");
+                boolean isBorrowed = bookObj.getBoolean("isBorrowed");
+                String borrowedBy = bookObj.getString("borrowedBy") == null ? null : bookObj.getString("borrowedBy");
+                int borrowCount = bookObj.getInt("borrowCount");
+
+                Book libraryBook = new Book(bookId, title, author, isBorrowed, borrowedBy, borrowCount);
+                books.add(libraryBook);
+            }
+
+
+        } catch (IOException e) {
+            System.out.println("Error reading file.");
+        }
+
+    }
+
+
+
+    public JSONArray buildBooksJson() {
+
+        JSONArray booksArrJson = new JSONArray();
+
+        for (int i = 0; i < books.size(); i++) {
+
+            Book librarybook = books.get(i);
+
+            JSONObject jsonBook = new JSONObject();
+
+            jsonBook.put("id", librarybook.getId());
+            jsonBook.put("title", librarybook.getTitle());
+            jsonBook.put("author", librarybook.getAuthor());
+            jsonBook.put("isBorrowed", librarybook.isBorrowed());
+            jsonBook.put("borrowedBy", librarybook.getBorrowedByEmail());
+            jsonBook.put("borrowCount", librarybook.getBorrowCount());
+
+            booksArrJson.put(jsonBook);
+        }
+
+        return booksArrJson;
+
+    }
+
+
+    public void writeToJsonFile(String filepath) {
+
+        JSONArray jsonArray = buildBooksJson();
+
+
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filepath))){
+
+            bufferedWriter.write(jsonArray.toString(2));
+
+        } catch (IOException e) {
+
+            System.err.println("JSON file not found: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+
     public void saveUsers(String filePath) {
 
 
@@ -68,7 +150,6 @@ public class Library {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 
             String line;
-            users.clear();
 
             while ((line = reader.readLine()) != null) { // continuously reads a line of text from opened file
 
@@ -172,110 +253,6 @@ public class Library {
 
 
 
-    public JSONArray buildBooksJson() {
-
-        JSONArray booksArrJson = new JSONArray();
-
-        for (int i = 0; i < books.size(); i++) {
-
-            Book librarybook = books.get(i);
-
-            JSONObject jsonBook = new JSONObject();
-
-            jsonBook.put("id", librarybook.getId());
-            jsonBook.put("title", librarybook.getTitle());
-            jsonBook.put("author", librarybook.getAuthor());
-            jsonBook.put("isBorrowed", librarybook.isBorrowed());
-            jsonBook.put("borrowedBy", librarybook.getBorrowedByEmail());
-            jsonBook.put("borrowCount", librarybook.getBorrowCount());
-
-            booksArrJson.put(jsonBook);
-        }
-
-        return booksArrJson;
-
-    }
-
-
-    public void writeToJsonFile(String filepath) {
-
-        JSONArray jsonArray = buildBooksJson();
-
-
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filepath))){
-
-            bufferedWriter.write(jsonArray.toString(2));
-
-        } catch (IOException e) {
-
-            System.err.println("JSON file not found: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-
-    public void loadBooks(String filePath) {
-
-        books.clear();
-
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
-
-            String line;
-            boolean isFirstLine = true;
-
-            while ((line = bufferedReader.readLine()) != null) { // reads each line in csv till there's no more lines
-
-                if (isFirstLine) {
-                    isFirstLine = false;
-                    continue;
-                }
-
-                ArrayList<String> rowOfFields = getFields(line);
-
-                int id = Integer.parseInt(rowOfFields.get(0));
-                String title = rowOfFields.get(1);
-                String author = (rowOfFields.get(2).isEmpty()) ? "No Author" : rowOfFields.get(2);
-
-                Book libraryBook = new Book(id, title, author, false, null, 0);
-                books.add(libraryBook);
-
-            }
-
-
-
-        } catch (IOException e) {
-            System.out.println("Error reading file.");
-        }
-
-    }
-
-    private static ArrayList<String> getFields(String line) {
-
-        ArrayList<String> rowOfFields = new ArrayList<>();
-        StringBuilder currentField = new StringBuilder();
-        boolean insideQuote = false; // keeps track of leading/trailing quotation marks
-
-
-        for (int i = 0; i < line.length(); i++) {
-
-            char character = line.charAt(i);
-            if (character == '"') {
-
-                insideQuote = !insideQuote;
-
-            } else if (character == ',' && !insideQuote) { // checks for commas that aren't inside quotation marks
-
-                rowOfFields.add(currentField.toString()); // adds the current row field built to a list
-                currentField.delete(0, currentField.length()); // resets the currentField variable
-
-            } else {
-                currentField.append(character); // builds the field char by char
-            }
-        }
-
-        rowOfFields.add(currentField.toString());
-        return rowOfFields;
-    }
 
 
 //    public void addBook(User user, Book book) {
@@ -322,7 +299,7 @@ public class Library {
                 user.getBorrowedBooks().add(libraryBook);
                 libraryBook.increaseBorrowCount();
                 saveUsers("src/main/java/com/nology/user/users.csv");
-//                saveBooksCSV("src/main/java/com/nology/libray_books.csv");
+                writeToJsonFile("src/main/java/com/nology/books.json");
 
                 System.out.println("Book: " + libraryBook.getTitle() + ", borrowed by user: " + libraryBook.getBorrowedByEmail());
                 return;
@@ -347,7 +324,7 @@ public class Library {
                 returnedBook.setBorrowedByEmail(null);
                 user.getBorrowedBooks().remove(returnedBook);
                 saveUsers("src/main/java/com/nology/user/users.csv");
-//                saveBooksCSV("src/main/java/com/nology/libray_books.csv");
+                writeToJsonFile("src/main/java/com/nology/books.json");
 
                 System.out.println("Book: " + bookTitle + ", has been returned by user: " + user.getName());
                 return;

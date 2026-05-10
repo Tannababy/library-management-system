@@ -13,13 +13,13 @@ public class Main {
 
 
         String usersFilePath = "src/main/java/com/nology/user/users.csv";
-        String booksFilePath = "src/main/java/com/nology/books_data.csv";
         String booksJsonPath = "src/main/java/com/nology/books.json";
 
         Library myLibrary = new Library();
-        myLibrary.loadBooks(booksFilePath);
-        myLibrary.writeToJsonFile(booksJsonPath);
+
+        myLibrary.loadBooksFromJson(booksJsonPath);
         myLibrary.loadUsers(usersFilePath);
+        myLibrary.writeToJsonFile(booksJsonPath);
 
 
         User currentUser = null;
@@ -99,7 +99,6 @@ public class Main {
 
                 if (adminOption == 0){
 
-                    myLibrary.writeToJsonFile(booksJsonPath);
 
                     isRunningAdmin = false;
                     System.out.println("Existing the application, bye!");
