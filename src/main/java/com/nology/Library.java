@@ -179,15 +179,21 @@ public class Library {
 
                     for (int i = 0; i < listOfIds.length; i++) {
 
-                        int id =  Integer.parseInt(listOfIds[i].trim());
+                        String idString = listOfIds[i].trim();
 
-                        for (int j = 0; j < books.size(); j++) {
+                        if (!idString.isEmpty()) {
 
-                            if (books.get(j).getId() == id) {
+                            int id =  Integer.parseInt(idString);
 
-                                usersBorrowedBooksList.add(books.get(j));
+                            for (int j = 0; j < books.size(); j++) {
+
+                                if (books.get(j).getId() == id) {
+
+                                    usersBorrowedBooksList.add(books.get(j));
+                                }
                             }
                         }
+
                     }
 
                 }

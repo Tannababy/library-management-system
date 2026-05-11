@@ -33,11 +33,11 @@
   },
   {
     "author": "Said, Edward",
-    "borrowCount": 0,
+    "borrowCount": 1,
     "borrowedBy": "",
     "id": 5,
     "title": "Orientalism",
-    "isBorrowed": false
+    "isBorrowed": true
   },
   {
     "author": "Vapnik, Vladimir",
