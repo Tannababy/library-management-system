@@ -20,9 +20,10 @@ public class Library {
     private ArrayList<User> users = new ArrayList<>();
 
 
-    public void loadBooksFromJson(String filePath) {
+    public void loadBooks() {
 
         books.clear();
+
 
         HttpClient client = HttpClient.newHttpClient();
 
@@ -30,12 +31,17 @@ public class Library {
                 .uri(URI.create("http://localhost:8080/library_backend/books"))
                 .build();
 
+        String json = null;
+
         try {
 
             HttpResponse<String> response = client.send(request,
                             HttpResponse.BodyHandlers.ofString());
 
-            System.out.println(response.body());
+            json = response.body();
+            System.out.println(json);
+
+
 
         } catch (IOException e) {
 
@@ -46,23 +52,27 @@ public class Library {
             System.out.println("Request interrupted.");
         }
 
+        JSONArray booksJson = new JSONArray(json);
 
+        for (int i = 0; i < booksJson.length(); i++) {
 
+            JSONObject bookJson = booksJson.getJSONObject(i);
 
-//        for (int i = 0; i < listOfBooksJson.length(); i++) {
-//
-//            JSONObject bookObj = listOfBooksJson.getJSONObject(i);
-//
-//            int bookId = bookObj.getInt("id");
-//            String title = bookObj.getString("title");
-//            String author = bookObj.getString("author");
-//            boolean isBorrowed = bookObj.getBoolean("isBorrowed");
-//            String borrowedBy = bookObj.getString("borrowedBy") == null ? null : bookObj.getString("borrowedBy");
-//            int borrowCount = bookObj.getInt("borrowCount");
-//
-//            Book libraryBook = new Book(bookId, title, author, isBorrowed, borrowedBy, borrowCount);
-//            books.add(libraryBook);
-//        }
+            Book book = new Book();
+
+            book.setId(bookJson.getInt("id"));
+            book.setTitle(bookJson.getString("title"));
+            book.setAuthor(bookJson.getString("author"));
+            book.setBorrowed(!(bookJson.getBoolean("available")));
+            book.setBorrowedByEmail(
+                    bookJson.isNull("borrower")
+                            ? null
+                            : bookJson.getString("borrower"));
+            book.setBorrowCount(bookJson.getInt("borrowCount"));
+
+            books.add(book);
+        }
+
 
 
     }

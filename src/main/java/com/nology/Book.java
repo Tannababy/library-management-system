@@ -21,9 +21,16 @@ public class Book {
         this.borrowCount = borrowCount;
     }
 
+    public Book() {
+    }
+
 
     public int getId() {
         return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -60,6 +67,10 @@ public class Book {
 
     public int getBorrowCount() {
         return borrowCount;
+    }
+
+    public void setBorrowCount(int borrowCount) {
+        this.borrowCount = borrowCount;
     }
 
     public void increaseBorrowCount() {
