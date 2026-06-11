@@ -6,6 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,36 +24,46 @@ public class Library {
 
         books.clear();
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
+        HttpClient client = HttpClient.newHttpClient();
 
-            StringBuilder fullBookJsonArr = new StringBuilder();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/library_backend/books"))
+                .build();
 
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                fullBookJsonArr.append(line);
-            }
+        try {
 
-            JSONArray listOfBooksJson = new JSONArray(fullBookJsonArr.toString());
+            HttpResponse<String> response = client.send(request,
+                            HttpResponse.BodyHandlers.ofString());
 
-            for (int i = 0; i < listOfBooksJson.length(); i++) {
-
-                JSONObject bookObj = listOfBooksJson.getJSONObject(i);
-
-                int bookId = bookObj.getInt("id");
-                String title = bookObj.getString("title");
-                String author = bookObj.getString("author");
-                boolean isBorrowed = bookObj.getBoolean("isBorrowed");
-                String borrowedBy = bookObj.getString("borrowedBy") == null ? null : bookObj.getString("borrowedBy");
-                int borrowCount = bookObj.getInt("borrowCount");
-
-                Book libraryBook = new Book(bookId, title, author, isBorrowed, borrowedBy, borrowCount);
-                books.add(libraryBook);
-            }
-
+            System.out.println(response.body());
 
         } catch (IOException e) {
-            System.out.println("Error reading file.");
+
+            System.out.println("Could not connect to server.");
+
+        } catch (InterruptedException e) {
+
+            System.out.println("Request interrupted.");
         }
+
+
+
+
+//        for (int i = 0; i < listOfBooksJson.length(); i++) {
+//
+//            JSONObject bookObj = listOfBooksJson.getJSONObject(i);
+//
+//            int bookId = bookObj.getInt("id");
+//            String title = bookObj.getString("title");
+//            String author = bookObj.getString("author");
+//            boolean isBorrowed = bookObj.getBoolean("isBorrowed");
+//            String borrowedBy = bookObj.getString("borrowedBy") == null ? null : bookObj.getString("borrowedBy");
+//            int borrowCount = bookObj.getInt("borrowCount");
+//
+//            Book libraryBook = new Book(bookId, title, author, isBorrowed, borrowedBy, borrowCount);
+//            books.add(libraryBook);
+//        }
+
 
     }
 

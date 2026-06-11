@@ -17,7 +17,7 @@ public class Main {
 
         Library myLibrary = new Library();
 
-        myLibrary.loadBooksFromJson(booksJsonPath);
+//        myLibrary.loadBooksFromJson(booksJsonPath);
         myLibrary.loadUsers(usersFilePath);
         myLibrary.writeToJsonFile(booksJsonPath);
 
