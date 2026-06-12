@@ -4,11 +4,11 @@ import com.nology.Book;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class User {
 
+    private int id;
     private String name;
     private String email;
     private String password;
@@ -18,6 +18,9 @@ public class User {
 
     static Scanner userScanner = new Scanner(System.in);
 
+    public User(){
+
+    }
 
     public User(String name, String email, String password, boolean isAdmin) {
 
@@ -116,6 +119,26 @@ public class User {
 //        return listOfBooks.toString();
 //    }
 
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
     @Override
     public String toString() {

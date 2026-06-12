@@ -28,7 +28,7 @@ public class Library {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8080/library_backend/books"))
+                .uri(URI.create("http://localhost:8080/library_backend/books/"))
                 .build();
 
         String json = null;
@@ -73,8 +73,6 @@ public class Library {
             books.add(book);
         }
 
-
-
     }
 
 
@@ -113,116 +111,50 @@ public class Library {
 
 
 
-    public void saveUsers(String filePath) {
-
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-
-            writer.write("Username," + "Email," + "Password," + "BooksBorrowedById," + "IsAdmin"); //rewrites header
-            writer.newLine();
-
-            String name, email, password, booksBorrowedById = "";
-            boolean isAdmin;
-            for (int i = 0; i < users.size(); i++) {
-
-                User user = users.get(i);
-
-                name = user.getName();
-                email = user.getEmail();
-                password = user.getPassword();
-                isAdmin = user.isAdmin();
-
-                if (!isAdmin) {
-
-                    booksBorrowedById = user.getBorrowedBooksIds();
-                    String row = name + "," + email + "," + password + "," + booksBorrowedById + "," + isAdmin;
-                    writer.write(row);
-                    writer.newLine();
-                } else {
-
-                    String row = name + "," + email + "," + password + "," + "[ ]" + "," + isAdmin;
-                    writer.write(row);
-                    writer.newLine();
-                }
-
-
-
-            }
-
-
-        } catch (IOException e) {
-            System.err.println("An error occurred.");
-            e.printStackTrace();
-        }
-
-    }
-
-
-    public void loadUsers(String filePath) {
+    public void loadUsers() {
 
         users.clear();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        HttpClient client = HttpClient.newHttpClient();
 
-            String line;
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/library_backend/users/"))
+                .build();
 
-            while ((line = reader.readLine()) != null) { // continuously reads a line of text from opened file
+        String json = null;
 
-                if (line.contains("Username") && line.contains("Password")) { // skip header
-                    continue;
-                }
+        try {
 
-                String[] values = line.split(",");
-                List<String> row = Arrays.asList(values);
+            HttpResponse<String> response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
 
-                String userName, userEmail, userPassword, userBorrowedBooks;
-
-                userName = row.get(0);
-                userEmail = row.get(1);
-                userPassword = row.get(2);
-                userBorrowedBooks = row.get(3);
-                // [ 1, 2, 3, 5, 23 ]
-                ArrayList<Book> usersBorrowedBooksList = new ArrayList<>();
-
-                if (!userBorrowedBooks.trim().equals("[]") && !userBorrowedBooks.trim().isEmpty())  {
-
-                    usersBorrowedBooksList = new ArrayList<>();
-
-                    userBorrowedBooks = userBorrowedBooks.replace("[","").replace("]","");
-
-                    String[] listOfIds = userBorrowedBooks.split(",");
-
-                    for (int i = 0; i < listOfIds.length; i++) {
-
-                        String idString = listOfIds[i].trim();
-
-                        if (!idString.isEmpty()) {
-
-                            int id =  Integer.parseInt(idString);
-
-                            for (int j = 0; j < books.size(); j++) {
-
-                                if (books.get(j).getId() == id) {
-
-                                    usersBorrowedBooksList.add(books.get(j));
-                                }
-                            }
-                        }
-
-                    }
-
-                }
-
-
-                User newUser = new User(userName, userEmail, userPassword, Boolean.parseBoolean(row.getLast()), usersBorrowedBooksList);
-                users.add(newUser);
-
-            }
+            json = response.body();
+            System.out.println(json);
 
         } catch (IOException e) {
 
-            System.err.println("CSV file not found: " + e.getMessage());
-            e.printStackTrace();
+            System.out.println("Could not connect to server.");
+
+        } catch (InterruptedException e) {
+
+            System.out.println("Request interrupted.");
+        }
+
+        JSONArray usersJson = new JSONArray(json);
+
+        for (int i = 0; i < usersJson.length(); i++) {
+
+            JSONObject userJson = usersJson.getJSONObject(i);
+
+            User user = new User();
+
+            user.setId(userJson.getInt("id"));
+            user.setName(userJson.getString("username"));
+            user.setEmail(userJson.getString("email"));
+            user.setPassword(userJson.getString("password"));
+            user.setAdmin(userJson.getBoolean("admin"));
+
+            users.add(user);
         }
 
 
@@ -319,7 +251,6 @@ public class Library {
                 libraryBook.setBorrowedByEmail(user.getEmail());
                 user.getBorrowedBooks().add(libraryBook);
                 libraryBook.increaseBorrowCount();
-                saveUsers("src/main/java/com/nology/user/users.csv");
                 updateBook(libraryBook);
 
                 System.out.println("Book: " + libraryBook.getTitle() + ", borrowed by user: " + libraryBook.getBorrowedByEmail());
@@ -344,7 +275,6 @@ public class Library {
                 returnedBook.setBorrowed(false);
                 returnedBook.setBorrowedByEmail(null);
                 user.getBorrowedBooks().remove(returnedBook);
-                saveUsers("src/main/java/com/nology/user/users.csv");
                 updateBook(returnedBook);
 
                 System.out.println("Book: " + bookTitle + ", has been returned by user: " + user.getName());

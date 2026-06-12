@@ -12,12 +12,10 @@ public class Main {
         Scanner myScanner = new Scanner(System.in);
 
 
-        String usersFilePath = "src/main/java/com/nology/user/users.csv";
-
         Library myLibrary = new Library();
 
         myLibrary.loadBooks();
-        myLibrary.loadUsers(usersFilePath);
+        myLibrary.loadUsers();
 
 
         User currentUser = null;
@@ -50,7 +48,6 @@ public class Main {
                         // account creation
                         User newUser = new User(inputName, inputEmail, inputPassword, false);
                         myLibrary.addUserToUsersList(newUser);
-                        myLibrary.saveUsers(usersFilePath);
                         currentUser = newUser;
 
                     }
@@ -59,7 +56,6 @@ public class Main {
                     // admin account creation
                     Admin newAdmin = new Admin(inputName, inputEmail, inputPassword, true);
                     myLibrary.addUserToUsersList(newAdmin);
-                    myLibrary.saveUsers(usersFilePath);
                     currentUser = newAdmin;
                 }
 
