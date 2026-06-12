@@ -13,13 +13,11 @@ public class Main {
 
 
         String usersFilePath = "src/main/java/com/nology/user/users.csv";
-        String booksJsonPath = "src/main/java/com/nology/books.json";
 
         Library myLibrary = new Library();
 
         myLibrary.loadBooks();
         myLibrary.loadUsers(usersFilePath);
-        myLibrary.writeToJsonFile(booksJsonPath);
 
 
         User currentUser = null;

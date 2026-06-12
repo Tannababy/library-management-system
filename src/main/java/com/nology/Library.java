@@ -78,45 +78,36 @@ public class Library {
     }
 
 
+    public void updateBook(Book book) {
 
-    public JSONArray buildBooksJson() {
+        JSONObject json = new JSONObject();
 
-        JSONArray booksArrJson = new JSONArray();
+        json.put("id", book.getId());
+        json.put("title", book.getTitle());
+        json.put("author", book.getAuthor());
+        json.put("available", !book.isBorrowed());
+        json.put("borrower", book.getBorrowedByEmail());
+        json.put("borrowCount", book.getBorrowCount());
 
-        for (int i = 0; i < books.size(); i++) {
+        String body = json.toString();
 
-            Book librarybook = books.get(i);
+        HttpClient client = HttpClient.newHttpClient();
 
-            JSONObject jsonBook = new JSONObject();
+        HttpRequest request = HttpRequest.newBuilder().PUT(HttpRequest.BodyPublishers.ofString(body)).uri(URI.create("http://localhost:8080/library_backend/books/" + book.getId())).header("Content-Type", "application/json").build();
 
-            jsonBook.put("id", librarybook.getId());
-            jsonBook.put("title", librarybook.getTitle());
-            jsonBook.put("author", librarybook.getAuthor());
-            jsonBook.put("isBorrowed", librarybook.isBorrowed());
-            jsonBook.put("borrowedBy", librarybook.getBorrowedByEmail());
-            jsonBook.put("borrowCount", librarybook.getBorrowCount());
+        System.out.println(body);
 
-            booksArrJson.put(jsonBook);
-        }
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        return booksArrJson;
-
-    }
-
-
-    public void writeToJsonFile(String filepath) {
-
-        JSONArray jsonArray = buildBooksJson();
-
-
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filepath))){
-
-            bufferedWriter.write(jsonArray.toString(2));
-
+            System.out.println("Status: " + response.statusCode());
+            System.out.println("Response: " + response.body());
         } catch (IOException e) {
 
-            System.err.println("JSON file not found: " + e.getMessage());
-            e.printStackTrace();
+            System.out.println("Could not connect to server");
+        } catch (InterruptedException e) {
+
+            System.out.println("Request interrupted.");
         }
     }
 
@@ -329,7 +320,7 @@ public class Library {
                 user.getBorrowedBooks().add(libraryBook);
                 libraryBook.increaseBorrowCount();
                 saveUsers("src/main/java/com/nology/user/users.csv");
-                writeToJsonFile("src/main/java/com/nology/books.json");
+                updateBook(libraryBook);
 
                 System.out.println("Book: " + libraryBook.getTitle() + ", borrowed by user: " + libraryBook.getBorrowedByEmail());
                 return;
@@ -354,7 +345,7 @@ public class Library {
                 returnedBook.setBorrowedByEmail(null);
                 user.getBorrowedBooks().remove(returnedBook);
                 saveUsers("src/main/java/com/nology/user/users.csv");
-                writeToJsonFile("src/main/java/com/nology/books.json");
+                updateBook(returnedBook);
 
                 System.out.println("Book: " + bookTitle + ", has been returned by user: " + user.getName());
                 return;

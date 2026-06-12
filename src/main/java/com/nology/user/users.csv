@@ -1,6 +1,6 @@
 Username,Email,Password,BooksBorrowedById,IsAdmin
 Lotanna,tanna@yahoo.com,1234qwer,,false
 April,aprilsworld@hotmail.com,pass1234,,false
-Stephanie,steph@yahoo.com,password123,,false
-Emeka,emeks12@hotmail.com,password12345,[2, 5],false
+Stephanie,steph@yahoo.com,password123,[117],false
+Emeka,emeks12@hotmail.com,password12345,[2],false
 Librarian,lib@library.com,library1234,[ ],true
